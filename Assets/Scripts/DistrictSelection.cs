@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class DistrictSelection : MonoBehaviour
 {
     public Text coinsText;
-    public static int coins;
     public static int curDistrict;
     public static int unlockedDistricts;
     public GameObject button;
@@ -15,7 +14,7 @@ public class DistrictSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        coinsText.text = "$" + coins;
+        coinsText.text = "$" + StartGame.coins;
         if (unlockedDistricts == 0)
         {
             unlockedDistricts = 1;

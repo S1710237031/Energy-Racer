@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\AllMonths.cs" />
     <Compile Include="Assets\Scripts\BackgroundTile.cs" />
     <Compile Include="Assets\Scripts\Board.cs" />
+    <Compile Include="Assets\Scripts\Car.cs" />
+    <Compile Include="Assets\Scripts\carShop.cs" />
     <Compile Include="Assets\Scripts\DistrictSelection.cs" />
     <Compile Include="Assets\Scripts\Dot.cs" />
     <Compile Include="Assets\Scripts\FindMatches.cs" />
@@ -74,6 +76,8 @@
     <Compile Include="Assets\Scripts\LocationService.cs" />
     <Compile Include="Assets\Scripts\MonthObject.cs" />
     <Compile Include="Assets\Scripts\PermissionsDialog.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
+    <Compile Include="Assets\Scripts\Upgrade.cs" />
     <None Include="Assets\JsonDotNet\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/anna/Downloads/PRO4-mergedCode/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
