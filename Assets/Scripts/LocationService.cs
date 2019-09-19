@@ -27,8 +27,8 @@ public class LocationService : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(GetDeviceLocation());
-        location.text = "!! " + City + ": " + Clouds + ", " + sunrise + ", " + sunset;
+        //StartCoroutine(GetDeviceLocation());
+        //location.text = "!! " + City + ": " + Clouds + ", " + sunrise + ", " + sunset;
     }
 
     // Get current time from device, if that fails get Unity frame time

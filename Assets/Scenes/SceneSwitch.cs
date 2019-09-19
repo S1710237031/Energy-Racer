@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SceneSwitch : MonoBehaviour
 {
+    public Board board;
 
     public void GotoGameScene()
     {
@@ -18,9 +19,10 @@ public class SceneSwitch : MonoBehaviour
 
     public void GoToWinScene()
     {
+       
         SceneManager.LoadScene("GameWon");
     }
-
+    
     public void GotoLevelSelectScene()
     {
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
@@ -38,13 +40,21 @@ public class SceneSwitch : MonoBehaviour
         {
             if(DistrictSelection.curDistrict >= DistrictSelection.unlockedDistricts)
             DistrictSelection.unlockedDistricts++;
-            DistrictSelection.coins += Board.earnedCoins;
+            StartGame.coins += Board.earnedCoins;
+            PlayerPrefs.SetInt("coins", StartGame.coins);
         }
+        
         SceneManager.LoadScene("DistrictSelect");
     }
 
     public void GoToStartScene()
     {
+        if (SceneManager.GetActiveScene().name == "GameWon")
+        {
+
+            StartGame.coins += Board.earnedCoins;
+            PlayerPrefs.SetInt("coins", StartGame.coins);
+        }
 
         SceneManager.LoadScene("StartScene");
     }

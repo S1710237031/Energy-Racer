@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class Board : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Board : MonoBehaviour
     public bool gameWon;
     public Slider slider;
     SceneSwitch switchScene;
+    public static Car car;
+    public static Upgrade upgrade;
 
     LocationService location;
     public int clouds;
@@ -45,10 +48,10 @@ public class Board : MonoBehaviour
         allDots = new GameObject[width, height];
         Setup(7, 7, 20, 6);
        
-        location = new LocationService();
-        location.Start();
-        city = LocationService.City;
-        clouds = int.Parse(LocationService.Clouds);
+        //location = new LocationService();
+        //location.Start();
+        //city = LocationService.City;
+        //clouds = int.Parse(LocationService.Clouds);
 
         if (remainingMoves == 1)
         {
@@ -85,6 +88,17 @@ public class Board : MonoBehaviour
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
+
+        if(upgrade != null)
+        {
+            remainingMoves += upgrade.bonusMoves;
+        }
+
+        if(car != null)
+        {
+            neededScore -= car.movesReduction;
+        }
+
         width = boardWidth;
         height = boardHeight;
 
