@@ -463,7 +463,6 @@ GameObject:
   m_Component:
   - component: {fileID: 579608683}
   - component: {fileID: 579608680}
-  - component: {fileID: 579608681}
   - component: {fileID: 579608682}
   m_Layer: 0
   m_Name: Board
@@ -490,14 +489,14 @@ MonoBehaviour:
   tilePrefab: {fileID: 449309071925075197, guid: ed286ea6b9bdf44e89c21c10e8417aa4,
     type: 3}
   dots:
-  - {fileID: 130085307098257122, guid: 0140d9ffad17d4f149bea3188732e4d9, type: 3}
-  - {fileID: 2560650122653191943, guid: bc70f2bf04de04a88a77f86138834c3b, type: 3}
   - {fileID: 1344239302437462642, guid: 88f0479bdd309403993c78c6764e9240, type: 3}
-  - {fileID: 8938670303405813505, guid: 1da6ecb629a804b3ea615a26824d9cb5, type: 3}
-  - {fileID: 4101207876600222901, guid: 94c0271727593457b82d2d0166d5855c, type: 3}
-  - {fileID: 739435743700746147, guid: e4eb5ccd7f91d4d9a941ff1b8506ad72, type: 3}
-  - {fileID: 6157441543283892268, guid: 0243e47fee1b146acb5d7dd23aaed234, type: 3}
   - {fileID: 4969794043292512297, guid: 14a0dc14eb0764aaaa06e3f804b5fe5d, type: 3}
+  - {fileID: 8938670303405813505, guid: 1da6ecb629a804b3ea615a26824d9cb5, type: 3}
+  - {fileID: 2560650122653191943, guid: bc70f2bf04de04a88a77f86138834c3b, type: 3}
+  - {fileID: 130085307098257122, guid: 0140d9ffad17d4f149bea3188732e4d9, type: 3}
+  - {fileID: 739435743700746147, guid: e4eb5ccd7f91d4d9a941ff1b8506ad72, type: 3}
+  - {fileID: 4101207876600222901, guid: 94c0271727593457b82d2d0166d5855c, type: 3}
+  - {fileID: 6157441543283892268, guid: 0243e47fee1b146acb5d7dd23aaed234, type: 3}
   curScore: 0
   neededScore: 0
   levelText: {fileID: 1574874017}
@@ -509,24 +508,8 @@ MonoBehaviour:
   clouds: 0
   city: 
   curDistr: 0
---- !u!114 &579608681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579608679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d1554e47b8dfb4d82aad9cf7badf67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TIME: 0
-  checkSun: 0
-  sunrise: 0
-  sunset: 0
-  location: {fileID: 1357142568}
-  difficulty: {fileID: 1746427361}
+  level: 0
+  testText: {fileID: 1746427361}
 --- !u!222 &579608682
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1397,4 +1380,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2110843190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2110843192}
+  - component: {fileID: 2110843191}
+  m_Layer: 0
+  m_Name: LocationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2110843191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110843190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d1554e47b8dfb4d82aad9cf7badf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LAT: 0
+  LON: 0
+  TIME: 0
+  CHECKSUN: 0
+  City: 
+  Clouds: 
+  location: {fileID: 1357142568}
+  levelDifficulty: 0
+  difficulty: {fileID: 1746427361}
+--- !u!4 &2110843192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110843190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 726.35535, y: 490.06433, z: -1039.8602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

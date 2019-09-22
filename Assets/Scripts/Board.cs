@@ -2,11 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class Board : MonoBehaviour
 {
-    public int width; 
+    public int width;
     public int height;
     public int offset;
     public GameObject tilePrefab;
@@ -25,12 +24,13 @@ public class Board : MonoBehaviour
     public static Car car;
     public static Upgrade upgrade;
 
-    LocationService location;
     public int clouds;
     public string city;
     MonthObject[] monthsArray;
     public static int earnedCoins;
     public int curDistr;
+
+    public Text testText;
 
 
     // Start is called before the first frame update
@@ -42,16 +42,18 @@ public class Board : MonoBehaviour
         earnedCoins = 30;
         levelText.text = "coins: " + earnedCoins;
 
+        GameObject locationController = GameObject.Find("LocationController");
+        LocationService locationService = locationController.GetComponent<LocationService>();
+        StartCoroutine(locationService.GetDeviceLocation());
+        int level = locationService.levelDifficulty;
+
         width = 7;
         height = 7;
         allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
-        Setup(7, 7, 20, 6);
-       
-        //location = new LocationService();
-        //location.Start();
-        //city = LocationService.City;
-        //clouds = int.Parse(LocationService.Clouds);
+
+        // happens at end of weather coroutine
+        //Setup(7, 7, 20, 6, level);
 
         if (remainingMoves == 1)
         {
@@ -67,12 +69,12 @@ public class Board : MonoBehaviour
 
     public void GetMonths()
     {
-        monthsArray = AllMonths.Months;  
+        monthsArray = AllMonths.Months;
     }
 
     // Update is called once per frame
     public void Update()
-    { 
+    {
         if (remainingMoves == 1)
         {
             movesText.text = remainingMoves + " Zug übrig";
@@ -83,18 +85,19 @@ public class Board : MonoBehaviour
         }
     }
 
-    private void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach)
-    { 
+    public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
+    {
+        testText.text = "level: " + level;
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
 
-        if(upgrade != null)
+        if (upgrade != null)
         {
             remainingMoves += upgrade.bonusMoves;
         }
 
-        if(car != null)
+        if (car != null)
         {
             neededScore -= car.movesReduction;
         }
@@ -102,20 +105,68 @@ public class Board : MonoBehaviour
         width = boardWidth;
         height = boardHeight;
 
-        for (int i = 0; i < width; i++) 
+        for (int i = 0; i < width; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
                 Vector2 tempPosition = new Vector2(i, j + offset);
                 GameObject backgroundTile = Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
                 backgroundTile.transform.parent = transform;
                 backgroundTile.name = i + ", " + j;
-                int dotToUse = Random.Range(0, dots.Length);
+
+                // int dotToUse = Random.Range(0, dots.Length);
+
+                int dotToUse;
+                if (level == 1)
+                {
+                    // two good and neutral symbols
+                    dotToUse = Random.Range(0, dots.Length - 2);
+                    testText.text = "we are easy";
+                }
+                else if (level == 2)
+                {
+                    // one good, one bad, rest neutral
+                    dotToUse = Random.Range(1, dots.Length - 1);
+                    testText.text = "we are middle";
+                }
+                else if (level == 3)
+                {
+                    // just one good, neutral and bad symbols
+                    dotToUse = Random.Range(2, dots.Length);
+                    testText.text = "we are hard";
+                }
+                else
+                {
+                    // completely random, when night time or no location
+                    dotToUse = Random.Range(0, dots.Length);
+                }
 
                 int maxIter = 0;
-                while(MatchesAt(i, j, dots[dotToUse]) && maxIter < 100)
+                while (MatchesAt(i, j, dots[dotToUse]) && maxIter < 100)
                 {
-                    dotToUse = Random.Range(0, dots.Length);
+                    if (level == 1)
+                    {
+                        // two good and neutral symbols
+                        dotToUse = Random.Range(0, dots.Length - 2);
+                        testText.text = "we are easy";
+                    }
+                    else if (level == 2)
+                    {
+                        // one good, one bad, rest neutral
+                        dotToUse = Random.Range(1, dots.Length - 1);
+                        testText.text = "we are middle";
+                    }
+                    else if (level == 3)
+                    {
+                        // just one good, neutral and bad symbols
+                        dotToUse = Random.Range(2, dots.Length);
+                        testText.text = "we are hard";
+                    }
+                    else
+                    {
+                        // completely random, when night time or no location
+                        dotToUse = Random.Range(0, dots.Length);
+                    }
                     maxIter++;
                 }
 
@@ -123,7 +174,7 @@ public class Board : MonoBehaviour
                 dot.GetComponent<Dot>().col = i;
                 dot.GetComponent<Dot>().row = j;
 
-                dot.transform.parent = this.transform;
+                dot.transform.parent = transform;
                 dot.name = i + ", " + j;
                 allDots[i, j] = dot;
             }
@@ -134,31 +185,33 @@ public class Board : MonoBehaviour
     {
         if (col > 1 && row > 1)
         {
-            if(allDots[col -1,row].tag == piece.tag && allDots[col-2,row].tag == piece.tag) {
-                return true;
-            }
-            if (allDots[col, row-1].tag == piece.tag && allDots[col, row-2].tag == piece.tag)
+            if (allDots[col - 1, row].tag == piece.tag && allDots[col - 2, row].tag == piece.tag)
             {
                 return true;
             }
-        } else if(col <=1 || row <= 1)
+            if (allDots[col, row - 1].tag == piece.tag && allDots[col, row - 2].tag == piece.tag)
+            {
+                return true;
+            }
+        }
+        else if (col <= 1 || row <= 1)
         {
-            if(row > 1)
+            if (row > 1)
             {
-                if(allDots[col,row-1].tag == piece.tag && allDots[col, row-2].tag == piece.tag)
+                if (allDots[col, row - 1].tag == piece.tag && allDots[col, row - 2].tag == piece.tag)
                 {
                     return true;
                 }
             }
             if (col > 1)
             {
-                if (allDots[col-1, row].tag == piece.tag && allDots[col-2, row].tag == piece.tag)
+                if (allDots[col - 1, row].tag == piece.tag && allDots[col - 2, row].tag == piece.tag)
                 {
                     return true;
                 }
             }
         }
-        
+
         return false;
     }
 
@@ -166,7 +219,7 @@ public class Board : MonoBehaviour
     {
         if (allDots[col, row].GetComponent<Dot>().isMatched)
         {
-            if (allDots[col,row].tag == "Yellow" || allDots[col, row].tag == "Green")
+            if (allDots[col, row].tag == "Yellow" || allDots[col, row].tag == "Green")
             {
                 curScore++;
                 slider.value = curScore;
@@ -174,7 +227,7 @@ public class Board : MonoBehaviour
             else if (allDots[col, row].tag == "Pink" || allDots[col, row].tag == "Red")
             {
                 curScore--;
-                if(curScore < 0)
+                if (curScore < 0)
                 {
                     curScore = 0;
                 }
@@ -183,17 +236,17 @@ public class Board : MonoBehaviour
 
             Destroy(allDots[col, row]);
             allDots[col, row] = null;
-            
+
         }
     }
 
     public void DestroyMatches()
     {
-        for(int i = 0; i < width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
-                if(allDots[i,j] != null)
+                if (allDots[i, j] != null)
                 {
                     DestroyMatchesAt(i, j);
                     if (remainingMoves == 1)
@@ -225,7 +278,7 @@ public class Board : MonoBehaviour
                 {
                     nullCount++;
                 }
-                else if(nullCount > 0)
+                else if (nullCount > 0)
                 {
                     allDots[i, j].GetComponent<Dot>().row -= nullCount;
                     allDots[i, j] = null;
@@ -244,7 +297,7 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if(allDots[i,j] == null)
+                if (allDots[i, j] == null)
                 {
                     Vector2 tempPos = new Vector2(i, j + offset);
                     int dotToUse = Random.Range(0, dots.Length);
@@ -255,16 +308,16 @@ public class Board : MonoBehaviour
                 }
             }
         }
-       
+
     }
 
     private bool MatchesOnBoard()
     {
-        for(int i = 0; i < width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
-                if (allDots[i,j] != null)
+                if (allDots[i, j] != null)
                 {
                     if (allDots[i, j].GetComponent<Dot>().isMatched)
                     {
