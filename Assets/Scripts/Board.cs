@@ -34,11 +34,14 @@ public class Board : MonoBehaviour
     public int curDistr;
 
     public Text testText;
+    public int level;
+
+    GameObject locationController;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject locationController = GameObject.Find("LocationController");
+        locationController = GameObject.Find("LocationController");
         LocationPermission permission = locationController.GetComponent<LocationPermission>();
         permission.Start();
 
@@ -46,10 +49,6 @@ public class Board : MonoBehaviour
         levelText.text = "coins: " + earnedCoins;
 
         LocationService locationService = locationController.GetComponent<LocationService>();
-
-        //int level = locationService.levelDifficulty;
-        //hoursInADay = locationService.GetDayTimeHours();
-        //Clouds = double.Parse(locationService.Clouds);
         StartCoroutine(locationService.GetDeviceLocation());
 
         width = 7;
@@ -75,6 +74,11 @@ public class Board : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        if(level == 0)
+        {
+            LocationService locationService = locationController.GetComponent<LocationService>();
+            level = locationService.levelDifficulty;
+        }
         if (remainingMoves == 1)
         {
             movesText.text = remainingMoves + " Zug übrig";
@@ -87,7 +91,7 @@ public class Board : MonoBehaviour
 
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
     {
-        testText.text = "total: " + 0;
+        testText.text = "level: " + level;
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
@@ -115,11 +119,11 @@ public class Board : MonoBehaviour
                 backgroundTile.name = i + ", " + j;
 
                 int dotToUse = SetDotToUse(level);
-               
+
                 int maxIter = 0;
                 while (MatchesAt(i, j, dots[dotToUse]) && maxIter < 100)
                 {
-                   dotToUse = SetDotToUse(level);
+                    dotToUse = SetDotToUse(level);
                     maxIter++;
                 }
 
@@ -134,27 +138,31 @@ public class Board : MonoBehaviour
         }
     } // SetUp method
 
-    // chooses which dots are going to be in the game (according to weather)
     private int SetDotToUse(int _level)
     {
         int dotToUse;
         if (_level == 1)
         {
-            // two good and neutral symbols
-            dotToUse = UnityEngine.Random.Range(0, dots.Length - 1);
+            dotToUse = UnityEngine.Random.Range(0, dots.Length - 2);
             testText.text = "easy" + hoursInADay;
         }
         else if (_level == 2)
         {
-            // one good, one bad, rest neutral
-            dotToUse = UnityEngine.Random.Range(1, dots.Length - 1);
+            dotToUse = UnityEngine.Random.Range(1, dots.Length - 2);
             testText.text = "middle" + hoursInADay;
         }
         else if (_level == 3)
         {
-            // just one good, neutral and bad symbols
-            dotToUse = UnityEngine.Random.Range(1, dots.Length);
+            dotToUse = UnityEngine.Random.Range(1, dots.Length - 1);
             testText.text = "hard" + hoursInADay;
+        }
+        else if (_level == 4)
+        {
+            dotToUse = UnityEngine.Random.Range(2, dots.Length - 1);
+        }
+        else if (_level == 5)
+        {
+            dotToUse = UnityEngine.Random.Range(2, dots.Length);
         }
         else
         {
@@ -202,7 +210,7 @@ public class Board : MonoBehaviour
     {
         if (allDots[col, row].GetComponent<Dot>().isMatched)
         {
-            if (allDots[col,row].tag == "Battery" || allDots[col, row].tag == "Sun" ||
+            if (allDots[col, row].tag == "Battery" || allDots[col, row].tag == "Sun" ||
                 allDots[col, row].tag == "Plug")
             {
                 curScore++;
@@ -284,7 +292,7 @@ public class Board : MonoBehaviour
                 if (allDots[i, j] == null)
                 {
                     Vector2 tempPos = new Vector2(i, j + offset);
-                    int dotToUse = UnityEngine.Random.Range(0, dots.Length);
+                    int dotToUse = SetDotToUse(level);
                     GameObject piece = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
                     allDots[i, j] = piece;
                     piece.GetComponent<Dot>().col = i;

@@ -25,7 +25,6 @@ public class LocationService : MonoBehaviour
     public MonthObject[] monthsArray;
 
     public int levelDifficulty;
-    // public Text difficulty;
 
     public void SetUpBoard()
     {
@@ -37,10 +36,10 @@ public class LocationService : MonoBehaviour
     {
         SetDefaultCoords();
         SetUpBoard();
-        // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
-            location.text = "SERVICE NOT ENABLED"; yield break;
+            location.text = "SERVICE NOT ENABLED";
+            yield break;
         }
         else
         {
@@ -83,7 +82,7 @@ public class LocationService : MonoBehaviour
                 GetWeatherData(LAT, LON);
                 location.text = City + ": " + Clouds;
 
-               // double daily = GetDayTimeHours(sunrise, sunset);
+               // double daily = GetDayTimeHours();
                // location.text = "daily: " + daily;
                 board.Setup(7, 7, 20, 6, levelDifficulty);
             }
@@ -92,7 +91,6 @@ public class LocationService : MonoBehaviour
         }
     } // GetDeviceLocation method
 
-    // reqeust to openweathermap with key stored in APPID variable
     private void GetWeatherData(double _lat, double _lon)
     {
         using (WebClient webClient = new WebClient())
@@ -114,20 +112,17 @@ public class LocationService : MonoBehaviour
 
     } // GetWeatherData method
 
-    // calculate hours from sunrise to sunset
-    public double GetDayTimeHours(DateTime _sunrise, DateTime _sunset)
+    public double GetDayTimeHours()
     {
-        DateTime sunriseTime = _sunrise.ToLocalTime();
-        DateTime sunsetTime = _sunset.ToLocalTime();
-        double sunriseDouble = double.Parse(_sunrise.ToString());
-        double sunsetDouble = double.Parse(_sunset.ToString());
-
+        DateTime sunriseTime = sunrise.ToLocalTime();
+        DateTime sunsetTime = sunset.ToLocalTime();
+        double sunriseDouble = double.Parse(sunriseTime.ToString());
+        double sunsetDouble = double.Parse(sunsetTime.ToString());
         //location.text = sunriseTime + ", " + sunsetTime;
         return sunsetDouble - sunriseDouble;
 
     } // GetDayTimeHours method
 
-    // set default coordinates in case weathermap request fails
     private void SetDefaultCoords()
     {
         if (LAT == 0)
@@ -141,7 +136,6 @@ public class LocationService : MonoBehaviour
         }
     } // SetDefaultCoords method
 
-    // convert unix timestamp (json) to datetime
     private DateTime UnixTimestampToDateTime(string _unixTimestamp)
     {
         // Unix timestamp is seconds past epoch
@@ -151,7 +145,6 @@ public class LocationService : MonoBehaviour
         return dtDateTime;
     } // UnixTimestampToDateTime method
 
-    // chose one of three difficulty levels according to clouds
     private void SetLevelDifficulty()
     {
         SetCheckSun();
@@ -160,31 +153,34 @@ public class LocationService : MonoBehaviour
             if (Clouds != null)
             {
                 int cloudy = int.Parse(Clouds);
-                if (cloudy >= 0 && cloudy <= 33)
+                if (cloudy >= 0 && cloudy <= 20)
                 {
-                    //difficulty.text = "Level: Easy, " + City + ": " + Clouds;
                     levelDifficulty = 1;
                 }
-                if (cloudy > 33 && cloudy <= 66)
+                if (cloudy > 21 && cloudy <= 40)
                 {
-                    //difficulty.text = "Level: Middle, " + City + ": " + Clouds;
                     levelDifficulty = 2;
                 }
-                if (cloudy > 66 && cloudy <= 100)
+                if (cloudy > 41 && cloudy <= 60)
                 {
-                    //difficulty.text = "Level: Hard, " + City + ": " + Clouds;
                     levelDifficulty = 3;
+                }
+                if (cloudy > 61 && cloudy <= 80)
+                {
+                    levelDifficulty = 4;
+                }
+                if (cloudy > 81 && cloudy <= 100)
+                {
+                    levelDifficulty = 5;
                 }
             }
         }
         else
         {
-            levelDifficulty = 4;
-            // difficulty.text = "Level: NIGHT " + City + ": " + Clouds;
+            levelDifficulty = 6;
         }
     } // SetLevelDifficulty method
 
-    // set bool flag for daytime
     private void SetCheckSun()
     {
         DateTime localDate = DateTime.Now;
@@ -199,17 +195,15 @@ public class LocationService : MonoBehaviour
         }
     } // SetCheckSun method
 
-    // returns month object from array
     private MonthObject GetMonth(int _month)
     {
         monthsArray = AllMonths.Months;
         return monthsArray[_month];
     } // GetMonth method
 
-    // returns daily total (tagessumme)
     public double GetDailyTotal()
     {
-        double hoursInADay = GetDayTimeHours(sunrise, sunset);
+        double hoursInADay = GetDayTimeHours();
         int month = new DateTime().Month;
         MonthObject monthObj = GetMonth(month);
 
