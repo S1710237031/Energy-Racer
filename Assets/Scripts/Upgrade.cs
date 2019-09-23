@@ -8,6 +8,7 @@ public class Upgrade
     public string description;
     public int cost;
     public int bonusMoves;
+    public string owned;
 
     public Upgrade(string upgradeName, string description, int cost, int bonusMoves)
     {
@@ -15,6 +16,7 @@ public class Upgrade
         this.description = description;
         this.cost = cost;
         this.bonusMoves = bonusMoves;
+        this.owned = "not owned";
     }
 
 }

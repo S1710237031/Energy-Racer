@@ -4,14 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Blue
-  - Green
   - Brown
   - Orange
   - Pink
   - Purple
   - Red
-  - Yellow
   - 1
   - 2
   - 3
@@ -39,6 +36,20 @@ TagManager:
   - 25
   - 26
   - 27
+  - Plug
+  - Sun
+  - Battery
+  - Bike
+  - Cloud
+  - Flower
+  - Leaf
+  - Lightbulb
+  - Rain
+  - Recycling
+  - Thunderstorm
+  - Good
+  - Blue
+  - Green
   layers:
   - Default
   - TransparentFX

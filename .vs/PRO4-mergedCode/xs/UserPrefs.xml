@@ -1,16 +1,15 @@
 ﻿<Properties StartupConfiguration="{282760F5-EC82-8236-7923-2ED3DC84C6D6}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LocationService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BackgroundTile.cs">
     <Files>
-      <File FileName="Assets/Scripts/Board.cs" Line="98" Column="47" />
-      <File FileName="Assets/Scripts/DistrictSelection.cs" Line="37" Column="1" />
-      <File FileName="Assets/Scenes/SceneSwitch.cs" Line="44" Column="58" />
-      <File FileName="Assets/Scripts/StartGame.cs" Line="6" Column="15" />
-      <File FileName="Assets/Scripts/LevelSelection.cs" Line="26" Column="6" />
-      <File FileName="Assets/Scripts/carShop.cs" Line="57" Column="78" />
-      <File FileName="Assets/Scripts/Dot.cs" Line="142" Column="10" />
-      <File FileName="Assets/Scripts/Upgrade.cs" Line="5" Column="21" />
-      <File FileName="Assets/Scripts/Car.cs" Line="21" Column="35" />
-      <File FileName="Assets/Scripts/LocationService.cs" Line="30" Column="11" />
+      <File FileName="Assets/Scripts/Board.cs" Line="123" Column="1" />
+      <File FileName="Assets/Scripts/DistrictSelection.cs" Line="10" Column="18" />
+      <File FileName="Assets/Scripts/LevelSelection.cs" Line="49" Column="43" />
+      <File FileName="Assets/Scripts/carShop.cs" Line="57" Column="6" />
+      <File FileName="Assets/Scripts/Upgrade.cs" Line="19" Column="34" />
+      <File FileName="Assets/Scripts/Car.cs" Line="21" Column="34" />
+      <File FileName="Assets/Scripts/LocationService.cs" Line="9" Column="45" />
+      <File FileName="Assets/Scripts/Dot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BackgroundTile.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,7 +18,7 @@
             <Node name="Assets" expanded="True">
               <Node name="Scenes" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="LocationService.cs" selected="True" />
+                <Node name="BackgroundTile.cs" selected="True" />
               </Node>
             </Node>
           </Node>

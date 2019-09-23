@@ -202,12 +202,13 @@ public class Board : MonoBehaviour
     {
         if (allDots[col, row].GetComponent<Dot>().isMatched)
         {
-            if (allDots[col, row].tag == "Yellow" || allDots[col, row].tag == "Green")
+            if (allDots[col,row].tag == "Battery" || allDots[col, row].tag == "Sun" ||
+                allDots[col, row].tag == "Plug")
             {
                 curScore++;
                 slider.value = curScore;
             }
-            else if (allDots[col, row].tag == "Pink" || allDots[col, row].tag == "Red")
+            else if (allDots[col, row].tag == "Rain" || allDots[col, row].tag == "Cloud")
             {
                 curScore--;
                 if (curScore < 0)
