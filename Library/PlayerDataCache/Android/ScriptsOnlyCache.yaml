@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - Dot
     - FindMatches
     - LevelSelection
+    - LocationPermission
     - LocationService
     - SceneSwitch
     - StartGame
@@ -29,6 +30,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/Scenes/DistrictSelect.unity:
     - Class: 1
@@ -100,6 +103,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 9694}
+    - Class: 114
+      Script: {instanceID: 9730}
     - Class: 114
       Script: {instanceID: 9900}
     - Class: 114
@@ -628,7 +633,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 0d1bb3242741dfc5d9e32738bc4107c4
+      Hash: 83c3ff99a257c43c7014157621f3dd17
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Board
@@ -1006,9 +1011,9 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 13
   scenePathNames:
+  - Assets/Scenes/Game.unity
   - Assets/Scenes/StartScene.unity
   - Assets/Scenes/DistrictSelect.unity
-  - Assets/Scenes/Game.unity
   - Assets/Scenes/GameOver.unity
   - Assets/Scenes/GameWon.unity
   - Assets/Scenes/LevelSelect.unity

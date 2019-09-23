@@ -22,6 +22,7 @@ public class LocationService : MonoBehaviour
 
     private const string APPID = "1fd19b4506a1e2fc4127a81babde32e9";
     public Text location;
+    public MonthObject[] monthsArray;
 
     public int levelDifficulty;
     // public Text difficulty;
@@ -82,8 +83,9 @@ public class LocationService : MonoBehaviour
                 GetWeatherData(LAT, LON);
                 location.text = City + ": " + Clouds;
 
+               // double daily = GetDayTimeHours(sunrise, sunset);
+               // location.text = "daily: " + daily;
                 board.Setup(7, 7, 20, 6, levelDifficulty);
-
             }
             // Stop service if there is no need to query location updates continuously
             Input.location.Stop();
@@ -106,17 +108,21 @@ public class LocationService : MonoBehaviour
             string sunriseStr = result["sys"]["sunrise"].Value;
             sunrise = UnixTimestampToDateTime(sunriseStr);
             string sunsetStr = result["sys"]["sunset"].Value;
-            sunset = sunrise = UnixTimestampToDateTime(sunsetStr);
+            sunset = UnixTimestampToDateTime(sunsetStr);
         }
         SetLevelDifficulty();
 
     } // GetWeatherData method
 
     // calculate hours from sunrise to sunset
-    private double GetDayTimeHours()
+    public double GetDayTimeHours(DateTime _sunrise, DateTime _sunset)
     {
-        double sunsetDouble = double.Parse(sunset.ToString("yyyyMMddHHmmss"));
-        double sunriseDouble = double.Parse(sunrise.ToString("yyyyMMddHHmmss"));
+        DateTime sunriseTime = _sunrise.ToLocalTime();
+        DateTime sunsetTime = _sunset.ToLocalTime();
+        double sunriseDouble = double.Parse(_sunrise.ToString());
+        double sunsetDouble = double.Parse(_sunset.ToString());
+
+        //location.text = sunriseTime + ", " + sunsetTime;
         return sunsetDouble - sunriseDouble;
 
     } // GetDayTimeHours method
@@ -192,5 +198,27 @@ public class LocationService : MonoBehaviour
             CHECKSUN = true;
         }
     } // SetCheckSun method
+
+    // returns month object from array
+    private MonthObject GetMonth(int _month)
+    {
+        monthsArray = AllMonths.Months;
+        return monthsArray[_month];
+    } // GetMonth method
+
+    // returns daily total (tagessumme)
+    public double GetDailyTotal()
+    {
+        double hoursInADay = GetDayTimeHours(sunrise, sunset);
+        int month = new DateTime().Month;
+        MonthObject monthObj = GetMonth(month);
+
+        // sonnenstunden = durchschnittliche sonnenstunden in % für monat x tageslänge
+        double sunHours = monthObj.SunFactor * hoursInADay;
+
+        // tagessumme = wolkengrad x sonnenstunden
+        double clouds = double.Parse(Clouds);
+        return clouds * hoursInADay;
+    }  // GetDailyTotal method
 }
 
