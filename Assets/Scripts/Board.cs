@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -36,13 +37,13 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LocationPermission permission = new LocationPermission();
+        GameObject locationController = GameObject.Find("LocationController");
+        LocationPermission permission = locationController.GetComponent<LocationPermission>();
         permission.Start();
 
         earnedCoins = 30;
         levelText.text = "coins: " + earnedCoins;
 
-        GameObject locationController = GameObject.Find("LocationController");
         LocationService locationService = locationController.GetComponent<LocationService>();
         StartCoroutine(locationService.GetDeviceLocation());
         int level = locationService.levelDifficulty;
@@ -52,7 +53,7 @@ public class Board : MonoBehaviour
         allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
 
-        // happens at end of weather coroutine
+        // happens at end of weather coroutine 
         //Setup(7, 7, 20, 6, level);
 
         if (remainingMoves == 1)
@@ -65,11 +66,6 @@ public class Board : MonoBehaviour
         }
         slider.maxValue = neededScore;
         slider.value = 0;
-    }
-
-    public void GetMonths()
-    {
-        monthsArray = AllMonths.Months;
     }
 
     // Update is called once per frame
@@ -87,6 +83,7 @@ public class Board : MonoBehaviour
 
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
     {
+        MonthObject monthObj = GetMonth(new DateTime().Month);
         testText.text = "level: " + level;
         curScore = 0;
         neededScore = scoreToReach;
@@ -116,57 +113,12 @@ public class Board : MonoBehaviour
 
                 // int dotToUse = Random.Range(0, dots.Length);
 
-                int dotToUse;
-                if (level == 1)
-                {
-                    // two good and neutral symbols
-                    dotToUse = Random.Range(0, dots.Length - 2);
-                    testText.text = "we are easy";
-                }
-                else if (level == 2)
-                {
-                    // one good, one bad, rest neutral
-                    dotToUse = Random.Range(1, dots.Length - 1);
-                    testText.text = "we are middle";
-                }
-                else if (level == 3)
-                {
-                    // just one good, neutral and bad symbols
-                    dotToUse = Random.Range(2, dots.Length);
-                    testText.text = "we are hard";
-                }
-                else
-                {
-                    // completely random, when night time or no location
-                    dotToUse = Random.Range(0, dots.Length);
-                }
-
+                int dotToUse = SetDotToUse(level, monthObj);
+               
                 int maxIter = 0;
                 while (MatchesAt(i, j, dots[dotToUse]) && maxIter < 100)
                 {
-                    if (level == 1)
-                    {
-                        // two good and neutral symbols
-                        dotToUse = Random.Range(0, dots.Length - 2);
-                        testText.text = "we are easy";
-                    }
-                    else if (level == 2)
-                    {
-                        // one good, one bad, rest neutral
-                        dotToUse = Random.Range(1, dots.Length - 1);
-                        testText.text = "we are middle";
-                    }
-                    else if (level == 3)
-                    {
-                        // just one good, neutral and bad symbols
-                        dotToUse = Random.Range(2, dots.Length);
-                        testText.text = "we are hard";
-                    }
-                    else
-                    {
-                        // completely random, when night time or no location
-                        dotToUse = Random.Range(0, dots.Length);
-                    }
+                    dotToUse = SetDotToUse(level, monthObj);
                     maxIter++;
                 }
 
@@ -179,7 +131,37 @@ public class Board : MonoBehaviour
                 allDots[i, j] = dot;
             }
         }
-    }
+    } // SetUp method
+
+    // chooses which dots are going to be in the game (according to weather)
+    private int SetDotToUse(int _level, MonthObject _month)
+    {
+        int dotToUse;
+        if (_level == 1)
+        {
+            // two good and neutral symbols
+            dotToUse = UnityEngine.Random.Range(0, dots.Length - 1);
+            testText.text = "we are easy";
+        }
+        else if (_level == 2)
+        {
+            // one good, one bad, rest neutral
+            dotToUse = UnityEngine.Random.Range(1, dots.Length - 1);
+            testText.text = "we are middle";
+        }
+        else if (_level == 3)
+        {
+            // just one good, neutral and bad symbols
+            dotToUse = UnityEngine.Random.Range(1, dots.Length);
+            testText.text = "we are hard";
+        }
+        else
+        {
+            // completely random, when night time or no location
+            dotToUse = UnityEngine.Random.Range(0, dots.Length);
+        }
+        return dotToUse;
+    } // SetDotToUse method
 
     private bool MatchesAt(int col, int row, GameObject piece)
     {
@@ -300,7 +282,7 @@ public class Board : MonoBehaviour
                 if (allDots[i, j] == null)
                 {
                     Vector2 tempPos = new Vector2(i, j + offset);
-                    int dotToUse = Random.Range(0, dots.Length);
+                    int dotToUse = UnityEngine.Random.Range(0, dots.Length);
                     GameObject piece = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
                     allDots[i, j] = piece;
                     piece.GetComponent<Dot>().col = i;
@@ -308,7 +290,6 @@ public class Board : MonoBehaviour
                 }
             }
         }
-
     }
 
     private bool MatchesOnBoard()
@@ -369,4 +350,12 @@ public class Board : MonoBehaviour
 
         levelText.text = "coins: " + earnedCoins;
     }
+
+    // returns month object from array
+    public MonthObject GetMonth(int _month)
+    {
+        monthsArray = AllMonths.Months;
+        return monthsArray[_month];
+    } // GetMonth method
+
 }

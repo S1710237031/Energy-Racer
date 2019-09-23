@@ -14,6 +14,7 @@ public class LocationService : MonoBehaviour
     public bool CHECKSUN;
     public DateTime sunrise;
     public DateTime sunset;
+    public DateTime time;
 
     Board board;
     public string City;
@@ -98,7 +99,6 @@ public class LocationService : MonoBehaviour
             string url = string.Format("https://api.openweathermap.org/data/2.5/weather?lat=" + _lat + "&lon=" + _lon + "&APPID=" + APPID);
             var json = webClient.DownloadString(url);
             var result = JSON.Parse(json);
-
 
             Clouds = result["clouds"]["all"].Value;
             City = result["name"].Value;
