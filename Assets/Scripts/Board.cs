@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
     public int neededScore;
     public Text levelText;
     public Text movesText;
+    public Text neededScoreText;
     public int remainingMoves;
     public bool gameOver;
     public bool gameWon;
@@ -32,8 +33,6 @@ public class Board : MonoBehaviour
     public double Clouds;
     public static int earnedCoins;
     public int curDistr;
-
-    public Text testText;
     public int level;
 
     GameObject locationController;
@@ -57,9 +56,6 @@ public class Board : MonoBehaviour
         allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
 
-        // happens at end of weather coroutine 
-        //Setup(7, 7, 20, 6, level);
-
         if (remainingMoves == 1)
         {
             movesText.text = remainingMoves + " Zug übrig";
@@ -77,7 +73,7 @@ public class Board : MonoBehaviour
     {
         if(level == 0)
         {
-            LocationService locationService = locationController.GetComponent<LocationService>();
+            locationService = locationController.GetComponent<LocationService>();
             level = locationService.levelDifficulty;
         }
         if (remainingMoves == 1)
@@ -88,11 +84,12 @@ public class Board : MonoBehaviour
         {
             movesText.text = remainingMoves + " Züge übrig";
         }
+        neededScoreText.text = "Score: " + curScore + "/" + locationService.neededScore;
     }
 
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
     {
-        testText.text = "Score: " + curScore + "/" + locationService.neededScore;
+        // Setup happens at the end of LocationService Coroutine
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
@@ -223,10 +220,8 @@ public class Board : MonoBehaviour
                 }
                 slider.value = curScore;
             }
-
             Destroy(allDots[col, row]);
             allDots[col, row] = null;
-
         }
     }
 
@@ -342,7 +337,6 @@ public class Board : MonoBehaviour
         {
             SceneManager.LoadScene("GameOver");
         }
-
     }
 
     public void updateCoins()

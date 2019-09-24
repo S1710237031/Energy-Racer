@@ -626,6 +626,7 @@ MonoBehaviour:
   neededScore: 0
   levelText: {fileID: 1574874017}
   movesText: {fileID: 1590580609}
+  neededScoreText: {fileID: 0}
   remainingMoves: 0
   gameOver: 0
   gameWon: 0
@@ -635,7 +636,6 @@ MonoBehaviour:
   hoursInADay: 0
   Clouds: 0
   curDistr: 0
-  testText: {fileID: 1746427361}
   level: 0
 --- !u!222 &579608682
 CanvasRenderer:
@@ -1037,7 +1037,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -280}
-  m_SizeDelta: {x: 600, y: 90}
+  m_SizeDelta: {x: 900, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1357142568
 MonoBehaviour:
@@ -1393,7 +1393,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 220}
-  m_SizeDelta: {x: 600, y: 80}
+  m_SizeDelta: {x: 900, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746427361
 MonoBehaviour:
@@ -1426,7 +1426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: level difficulty goes here
+  m_Text: '...'
 --- !u!222 &1746427362
 CanvasRenderer:
   m_ObjectHideFlags: 0

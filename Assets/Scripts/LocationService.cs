@@ -42,6 +42,7 @@ public class LocationService : MonoBehaviour
         if (!Input.location.isEnabledByUser)
         {
             location.text = "SERVICE NOT ENABLED";
+            board.Setup(7, 7, 20, 15, 6);
             yield break;
         }
         else
