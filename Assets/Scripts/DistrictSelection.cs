@@ -32,7 +32,7 @@ public class DistrictSelection : MonoBehaviour
         //deactivate locked districts 
         for (int i = 27; i > unlockedDistricts; i--)
         {
-            button = GameObject.Find(distrNames[i - 1]);             button.GetComponent<Button>().interactable = false; 
+            button = GameObject.Find(distrNames[i - 1]);             button.GetComponent<Button>().interactable = false;
         }
     }
 

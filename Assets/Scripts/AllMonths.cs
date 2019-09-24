@@ -4,7 +4,24 @@ using UnityEngine;
 
 public class AllMonths
 {
-    public static MonthObject[] Months = new MonthObject[12];
+    private MonthObject[] Months;
+
+    public AllMonths()
+    {
+        Months = new MonthObject[12];
+        SetAllMonths();
+    }
+
+    public MonthObject[] GetAllMonths()
+    {
+        return Months;
+    }
+
+    public MonthObject GetMonth(int _index)
+    {
+        MonthObject monthObj = Months[_index];
+        return monthObj;
+    }
 
     private void SetAllMonths()
     {
@@ -38,11 +55,5 @@ public class AllMonths
     private void SetArray(int _index, MonthObject _month)
     {
         Months[_index] = _month;
-    }
-
-    // ?? not used yet
-    private void CalulateSunHours()
-    {
-
     }
 }

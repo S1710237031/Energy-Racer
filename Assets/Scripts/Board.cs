@@ -37,6 +37,7 @@ public class Board : MonoBehaviour
     public int level;
 
     GameObject locationController;
+    LocationService locationService;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +49,7 @@ public class Board : MonoBehaviour
         earnedCoins = 30;
         levelText.text = "coins: " + earnedCoins;
 
-        LocationService locationService = locationController.GetComponent<LocationService>();
+        locationService = locationController.GetComponent<LocationService>();
         StartCoroutine(locationService.GetDeviceLocation());
 
         width = 7;
@@ -91,7 +92,7 @@ public class Board : MonoBehaviour
 
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
     {
-        testText.text = "level: " + level;
+        testText.text = "Score: " + curScore + "/" + locationService.neededScore;
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
@@ -144,17 +145,14 @@ public class Board : MonoBehaviour
         if (_level == 1)
         {
             dotToUse = UnityEngine.Random.Range(0, dots.Length - 2);
-            testText.text = "easy" + hoursInADay;
         }
         else if (_level == 2)
         {
             dotToUse = UnityEngine.Random.Range(1, dots.Length - 2);
-            testText.text = "middle" + hoursInADay;
         }
         else if (_level == 3)
         {
             dotToUse = UnityEngine.Random.Range(1, dots.Length - 1);
-            testText.text = "hard" + hoursInADay;
         }
         else if (_level == 4)
         {
@@ -330,10 +328,10 @@ public class Board : MonoBehaviour
             yield return new WaitForSeconds(.2f);
             DestroyMatches();
         }
-        checkGameOver();
+        CheckGameOver();
     }
 
-    public void checkGameOver()
+    public void CheckGameOver()
     {
         if (curScore >= neededScore)
         {

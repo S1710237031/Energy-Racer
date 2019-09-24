@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\LocationService.cs" />
     <Compile Include="Assets\Scripts\MonthObject.cs" />
     <Compile Include="Assets\Scripts\PermissionsDialog.cs" />
+    <Compile Include="Assets\Scripts\PinchZoom.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Upgrade.cs" />
     <None Include="Assets\JsonDotNet\link.xml" />

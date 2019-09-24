@@ -22,14 +22,17 @@ public class LocationService : MonoBehaviour
 
     private const string APPID = "1fd19b4506a1e2fc4127a81babde32e9";
     public Text location;
-    public MonthObject[] monthsArray;
-
+    public AllMonths allMonths;
     public int levelDifficulty;
+    public int neededScore;
+    public int currentDistrict;
 
     public void SetUpBoard()
     {
-        GameObject boardOjbect = GameObject.Find("Board");
-        board = boardOjbect.GetComponent<Board>();
+        GameObject boardObject = GameObject.Find("Board");
+        board = boardObject.GetComponent<Board>();
+
+        currentDistrict = DistrictSelection.curDistrict;
     }
 
     public IEnumerator GetDeviceLocation()
@@ -80,11 +83,10 @@ public class LocationService : MonoBehaviour
                 TIME = Input.location.lastData.timestamp;
 
                 GetWeatherData(LAT, LON);
+                SetLevelDifficulty();
+                SetNeededScore();
                 location.text = City + ": " + Clouds;
-
-               // double daily = GetDayTimeHours();
-               // location.text = "daily: " + daily;
-                board.Setup(7, 7, 20, 6, levelDifficulty);
+                board.Setup(7, 7, 20, neededScore, levelDifficulty);
             }
             // Stop service if there is no need to query location updates continuously
             Input.location.Stop();
@@ -108,46 +110,12 @@ public class LocationService : MonoBehaviour
             string sunsetStr = result["sys"]["sunset"].Value;
             sunset = UnixTimestampToDateTime(sunsetStr);
         }
-        SetLevelDifficulty();
-
     } // GetWeatherData method
 
-    public double GetDayTimeHours()
-    {
-        DateTime sunriseTime = sunrise.ToLocalTime();
-        DateTime sunsetTime = sunset.ToLocalTime();
-        double sunriseDouble = double.Parse(sunriseTime.ToString());
-        double sunsetDouble = double.Parse(sunsetTime.ToString());
-        //location.text = sunriseTime + ", " + sunsetTime;
-        return sunsetDouble - sunriseDouble;
-
-    } // GetDayTimeHours method
-
-    private void SetDefaultCoords()
-    {
-        if (LAT == 0)
-        {
-            LAT = 48.5113;
-        }
-        LON = Input.location.lastData.longitude;
-        if (LON == 0)
-        {
-            LON = 14.5048;
-        }
-    } // SetDefaultCoords method
-
-    private DateTime UnixTimestampToDateTime(string _unixTimestamp)
-    {
-        // Unix timestamp is seconds past epoch
-        double timestamp = int.Parse(_unixTimestamp);
-        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        dtDateTime = dtDateTime.AddSeconds(timestamp).ToLocalTime();
-        return dtDateTime;
-    } // UnixTimestampToDateTime method
-
-    private void SetLevelDifficulty()
+    public void SetLevelDifficulty()
     {
         SetCheckSun();
+        float dailyTotal = GetDailyTotal();
         if (CHECKSUN == true)
         {
             if (Clouds != null)
@@ -157,19 +125,19 @@ public class LocationService : MonoBehaviour
                 {
                     levelDifficulty = 1;
                 }
-                if (cloudy > 21 && cloudy <= 40)
+                else if (cloudy > 21 && cloudy <= 40)
                 {
                     levelDifficulty = 2;
                 }
-                if (cloudy > 41 && cloudy <= 60)
+                else if (cloudy > 41 && cloudy <= 60)
                 {
                     levelDifficulty = 3;
                 }
-                if (cloudy > 61 && cloudy <= 80)
+                else if (cloudy > 61 && cloudy <= 80)
                 {
                     levelDifficulty = 4;
                 }
-                if (cloudy > 81 && cloudy <= 100)
+                else if (cloudy > 81 && cloudy <= 100)
                 {
                     levelDifficulty = 5;
                 }
@@ -181,6 +149,47 @@ public class LocationService : MonoBehaviour
         }
     } // SetLevelDifficulty method
 
+    public void SetNeededScore()
+    {
+        if (currentDistrict <= 5)
+        {
+            neededScore = 12;
+        }
+        else if (currentDistrict <= 10)
+        {
+            neededScore = 15;
+        }
+        else if (currentDistrict <= 15)
+        {
+            neededScore = 18;
+        }
+        else if (currentDistrict <= 20)
+        {
+            neededScore = 21;
+        }
+        else if (currentDistrict <= 25)
+        {
+            neededScore = 24;
+        }
+        else
+        {
+            neededScore = 27;
+        }
+    } // SetNeededScore;
+
+    private void SetDefaultCoords()
+    {
+        if (LAT == 0)
+        {
+            LAT = 48.5113;
+        }
+        if (LON == 0)
+        {
+            LON = 14.5048;
+        }
+        levelDifficulty = 6;
+    } // SetDefaultCoords method
+
     private void SetCheckSun()
     {
         DateTime localDate = DateTime.Now;
@@ -190,29 +199,62 @@ public class LocationService : MonoBehaviour
         }
         else
         {
-            // CHANGE TO FALSE, JUST "TRUE" FOR TESTING PURPOSES
+            // CHANGE TO True FOR TESTING PURPOSES
             CHECKSUN = true;
         }
     } // SetCheckSun method
 
-    private MonthObject GetMonth(int _month)
+    private DateTime UnixTimestampToDateTime(string _unixTimestamp)
     {
-        monthsArray = AllMonths.Months;
-        return monthsArray[_month];
+        // Unix timestamp is seconds past epoch
+        double timestamp = int.Parse(_unixTimestamp);
+        DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        dtDateTime = dtDateTime.AddSeconds(timestamp).ToLocalTime();
+        return dtDateTime;
+    } // UnixTimestampToDateTime method
+
+    private float GetDayTimeHours()
+    {
+        double sunriseHour = sunrise.Hour;
+        double sunriseMinutes = (sunriseHour * 60) + sunrise.Minute;
+        double sunriseSeconds = (sunriseMinutes * 60) + sunrise.Second;
+
+        double sunsetHour = sunset.Hour;
+        double sunsetMinutes = (sunsetHour * 60) + sunset.Minute;
+        double sunsetSeconds = (sunsetMinutes * 60) + sunset.Second;
+
+        double dayTimeSeconds = (sunsetSeconds - sunriseSeconds);
+        float dayTimeMinutes = (float)(dayTimeSeconds / 60);
+        float dayTimeHours = dayTimeMinutes / 60;
+        return dayTimeHours;
+    } // GetDayTimeHours method
+
+    public MonthObject GetMonth(int _month)
+    {
+        allMonths = new AllMonths();
+        return allMonths.GetMonth(_month - 1);
     } // GetMonth method
 
-    public double GetDailyTotal()
+    public float GetDailyTotal()
     {
-        double hoursInADay = GetDayTimeHours();
-        int month = new DateTime().Month;
+        float hoursInADay = GetDayTimeHours();
+        int month = DateTime.Now.Month;
         MonthObject monthObj = GetMonth(month);
 
-        // sonnenstunden = durchschnittliche sonnenstunden in % für monat x tageslänge
-        double sunHours = monthObj.SunFactor * hoursInADay;
+        // sonnenstunden = durchschnittliche sonnenstunden in % für monat x tageslaenge
+        float sunFactor = (float)monthObj.SunFactor;
+        float sunHours = sunFactor * hoursInADay;
 
         // tagessumme = wolkengrad x sonnenstunden
-        double clouds = double.Parse(Clouds);
-        return clouds * hoursInADay;
+        float clouds = float.Parse(Clouds);
+        if (clouds == 0)
+        {
+            return sunHours;
+        }
+        else
+        {
+            return sunHours * clouds;
+        }
     }  // GetDailyTotal method
 }
 

@@ -80,7 +80,7 @@
         yield return new WaitForSeconds(.5f);         if(swapWith != null)
         {                         if(!isMatched && !swapWith.GetComponent<Dot>().isMatched)
             {
-                board.checkGameOver();
+                board.CheckGameOver();
                 yield return new WaitForSeconds(.4f);
             }             else
             {
