@@ -123,6 +123,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10846}
     - Class: 114
+      Script: {instanceID: 10928}
+    - Class: 114
       Script: {instanceID: 11496}
     - Class: 114
       Script: {instanceID: 11590}
@@ -363,6 +365,53 @@ ScriptsOnlyBuild:
       Script: {instanceID: 9694}
     - Class: 114
       Script: {instanceID: 9732}
+    - Class: 114
+      Script: {instanceID: 9900}
+    - Class: 114
+      Script: {instanceID: 9950}
+    - Class: 114
+      Script: {instanceID: 10446}
+    - Class: 114
+      Script: {instanceID: 10656}
+    - Class: 114
+      Script: {instanceID: 10928}
+    - Class: 114
+      Script: {instanceID: 11496}
+    - Class: 114
+      Script: {instanceID: 11958}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Tutorial.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9694}
     - Class: 114
       Script: {instanceID: 9900}
     - Class: 114
@@ -700,7 +749,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 5971fb56bf73acbdea2ed334a209b6b4
+      Hash: 7e73e8ac9aa61b63aff6bd43dffca357
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PinchZoom
@@ -1031,4 +1080,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/GameOver.unity
   - Assets/Scenes/GameWon.unity
   - Assets/Scenes/Shop.unity
+  - Assets/Scenes/Tutorial.unity
   playerPath: C:/Users/User/Documents/HAGENBERG/Energy-Racer/test.apk

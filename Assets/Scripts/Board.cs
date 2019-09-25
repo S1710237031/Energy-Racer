@@ -64,8 +64,8 @@ public class Board : MonoBehaviour
         {
             movesText.text = remainingMoves + " Züge übrig";
         }
-        slider.maxValue = neededScore;
-        slider.value = 0;
+       // slider.maxValue = neededScore;
+       // slider.value = 0;
     }
 
     // Update is called once per frame
@@ -84,7 +84,6 @@ public class Board : MonoBehaviour
         {
             movesText.text = remainingMoves + " Züge übrig";
         }
-        neededScoreText.text = "Score: " + curScore + "/" + locationService.neededScore;
     }
 
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
@@ -93,6 +92,9 @@ public class Board : MonoBehaviour
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
+
+        slider.maxValue = neededScore;
+        slider.value = 0;
 
         if (upgrade != null)
         {
@@ -341,11 +343,11 @@ public class Board : MonoBehaviour
 
     public void updateCoins()
     {
-        if (remainingMoves <= 5)
+        if (remainingMoves < 5)
         {
             earnedCoins = 10;
         }
-        else if (remainingMoves <= 10 && remainingMoves > 5)
+        else if (remainingMoves <= 10 && remainingMoves >= 5)
         {
             earnedCoins = 20;
         }

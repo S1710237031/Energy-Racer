@@ -55,7 +55,7 @@ public class LocationService : MonoBehaviour
             int maxWait = 5000;
             while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
             {
-                location.text = "WAITING";
+                location.text = "LOADING";
                 yield return new WaitForSeconds(1);
                 maxWait--;
             }
@@ -86,7 +86,7 @@ public class LocationService : MonoBehaviour
                 GetWeatherData(LAT, LON);
                 SetLevelDifficulty();
                 SetNeededScore();
-                location.text = City + ": " + Clouds;
+                location.text = City;
                 board.Setup(7, 7, 20, neededScore, levelDifficulty);
             }
             // Stop service if there is no need to query location updates continuously
@@ -201,7 +201,7 @@ public class LocationService : MonoBehaviour
         else
         {
             // CHANGE TO True FOR TESTING PURPOSES
-            CHECKSUN = true;
+            CHECKSUN = false;
         }
     } // SetCheckSun method
 

@@ -19,10 +19,15 @@ public class SceneSwitch : MonoBehaviour
 
     public void GoToWinScene()
     {
-       
+
         SceneManager.LoadScene("GameWon");
     }
-    
+
+    public void GoToTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
     public void GotoLevelSelectScene()
     {
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
@@ -38,12 +43,12 @@ public class SceneSwitch : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "GameWon")
         {
-            if(DistrictSelection.curDistrict >= DistrictSelection.unlockedDistricts)
-            DistrictSelection.unlockedDistricts++;
+            if (DistrictSelection.curDistrict >= DistrictSelection.unlockedDistricts)
+                DistrictSelection.unlockedDistricts++;
             StartGame.coins += Board.earnedCoins;
             PlayerPrefs.SetInt("coins", StartGame.coins);
         }
-        
+
         SceneManager.LoadScene("DistrictSelect");
     }
 
@@ -51,7 +56,8 @@ public class SceneSwitch : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "GameWon")
         {
-
+            if (DistrictSelection.curDistrict >= DistrictSelection.unlockedDistricts)
+                DistrictSelection.unlockedDistricts++;
             StartGame.coins += Board.earnedCoins;
             PlayerPrefs.SetInt("coins", StartGame.coins);
         }
