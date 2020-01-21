@@ -11,9 +11,22 @@ public class SceneSwitch : MonoBehaviour
        // backgroundIsSet = false;
     }
 
+    public void GoToMultiplayerMenu()
+    {
+        SceneManager.LoadScene("MultiplayerMenu");
+    }
+
     public void GotoGameScene()
     {
-     //   Board.backgroundIsSet = false;
+        if (SceneManager.GetActiveScene().name == "MultiplayerMenu")
+        {
+            Board.isMultiplayer = true;
+        }
+        else
+        {
+            Board.isMultiplayer = false;
+        }
+
         SceneManager.LoadScene("Game");
     }
 

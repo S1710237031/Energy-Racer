@@ -1,4 +1,6 @@
-﻿public static class DistrictArray
+﻿using UnityEngine;
+
+public static class DistrictArray
 {
     public static District[] DisrictArr;
     private static int DistrictNumber = 27;
@@ -18,6 +20,12 @@
         {
             SetAllDistricts();
         }
+
+        if(_index == 0 && Board.isMultiplayer)
+        {
+            _index = 1;
+        }
+        Debug.Log(_index);
         return DisrictArr[_index];
     }
 

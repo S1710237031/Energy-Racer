@@ -21,7 +21,6 @@ public class Board : MonoBehaviour
     public bool gameOver;
     public bool gameWon;
     public Slider slider;
-    SceneSwitch switchScene;
     public static Car car;
     public static Upgrade upgrade;
 
@@ -38,16 +37,32 @@ public class Board : MonoBehaviour
 
     public static bool backgroundIsSet;
 
+    //multiplayer stuff
+    public static bool isMultiplayer;
+    public static string curPlayer;
+    public Text curPlayerText;
+    public Slider player2Slider;
+    public int curPlayer2Score;
+
     /// <summary>
     /// the game board is initialized, dots and background tiles are created
     /// </summary>
     void Start()
     {
+        curPlayer = "Player 1";
+        if (isMultiplayer)
+        {
+           curPlayerText.text = curPlayer;
+        } else
+        {
+            curPlayerText.text = " ";
+            player2Slider.gameObject.SetActive(false);
+        }
         backgroundIsSet = false;
 
         gameController = GameObject.Find("GameController");
 
-        earnedCoins = 0;
+        earnedCoins = 30;
         levelText.text = "Coins: " + earnedCoins;
 
         width = 7;
@@ -121,6 +136,13 @@ public class Board : MonoBehaviour
 
         slider.maxValue = neededScore;
         slider.value = 0;
+
+        if (isMultiplayer)
+        {
+            player2Slider.maxValue = neededScore;
+            player2Slider.value = 0;
+        }
+
 
         if (upgrade != null)
         {
@@ -253,21 +275,35 @@ public class Board : MonoBehaviour
             if (allDots[col, row].tag == "Battery" || allDots[col, row].tag == "Sun" ||
                 allDots[col, row].tag == "Plug")
             {
-                curScore++;
-                slider.value = curScore;
+                if (!isMultiplayer || curPlayer == "Player 1")
+                {
+                    curScore++;
+                }
+                else
+                {
+                    curPlayer2Score++;
+                }
             }
             else if (allDots[col, row].tag == "Rain" || allDots[col, row].tag == "Cloud")
             {
-                curScore--;
-                if (curScore < 0)
+                if (!isMultiplayer || curPlayer == "Player 1")
                 {
-                    curScore = 0;
+                    curScore--;
                 }
-                slider.value = curScore;
+                else
+                {
+                    curPlayer2Score--;
+                }
+            }
+            slider.value = curScore;
+            if (isMultiplayer)
+            {
+                player2Slider.value = curPlayer2Score;
             }
             Destroy(allDots[col, row]);
             allDots[col, row] = null;
         }
+
     }
 
     /// <summary>
@@ -395,15 +431,46 @@ public class Board : MonoBehaviour
     /// </summary>
     public void CheckGameOver()
     {
-        if (curScore >= neededScore)
+         if (Board.isMultiplayer)
         {
-            SceneManager.LoadScene("GameWon");
-            DistrictSelection.unlockedDistricts++;
+            if (Board.curPlayer == "Player 1")
+            {
+                Board.curPlayer = "Player 2";
+            }
+            else
+            {
+                Board.curPlayer = "Player 1";
+            }
+            curPlayerText.text = Board.curPlayer;
+
+            if (curScore >= neededScore || remainingMoves == 0 && curScore > curPlayer2Score)
+            {
+                SceneManager.LoadScene("MultiplayerWin");
+            }
+            else if (remainingMoves == 0 && curScore == curPlayer2Score && curScore < neededScore)
+            {
+                curPlayer = "Draw";
+                SceneManager.LoadScene("MultiplayerWin");
+            }
+            else
+            {
+                SceneManager.LoadScene("MultiplayerWin");
+            }
         }
-        else if (remainingMoves <= 0)
+        else
+        {
+            if (curScore >= neededScore)
+            {
+                SceneManager.LoadScene("GameWon");
+                DistrictSelection.unlockedDistricts++;
+            }
+        }
+        if (remainingMoves <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
+
+
     }
 
     /// <summary>
