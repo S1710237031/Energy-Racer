@@ -49,7 +49,7 @@
         District sanktLeonhard = new District("St. Leonhard", 48.4436, 14.6776, 1388, 23.67);
         District sanktOswald = new District("St. Oswald", 48.5006, 14.5877, 2906, 16.89);
         District tragwein = new District("Tragwein", 48.332, 14.6212, 3099, 21.09);
-        District unterweissenbach = new District("Unterweißenbach", 46.9516, 15.8625, 2174, 21.44);
+        District unterweissenbach = new District("Unterweissenbach", 46.9516, 15.8625, 2174, 21.44);
         District unterweitersdorf = new District("Unterweitersdorf", 48.3673, 14.4689, 2161, 19.21);
         District waldburg = new District("Waldburg", 48.509, 14.439, 1382, 15.27);
         District wartberg = new District("Wartberg ob der Aist", 48.3503, 14.5082, 4276, 18.00);

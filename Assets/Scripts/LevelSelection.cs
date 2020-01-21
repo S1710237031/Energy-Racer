@@ -34,7 +34,7 @@ public class LevelSelection : MonoBehaviour
         //GameObject coatOfArms = Instantiate(COAs[0], pos, Quaternion.identity) as GameObject;
         //coatOfArms.transform.parent = transform;
         */
-        rowName.text = "Postleitzahl \nFläche \nEinwohner \nHöhe";
+        rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe";
         districtInfo = new string[27]
         {
             "4240\n12,86km²\n7 960\n560m",
