@@ -26,6 +26,10 @@ public static class DistrictArray
             _index = 1;
         }
         Debug.Log(_index);
+        if (Board.isMultiplayer)
+        {
+            return DisrictArr[0];
+        }
         return DisrictArr[_index];
     }
 

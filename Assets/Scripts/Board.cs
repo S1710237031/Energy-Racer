@@ -426,6 +426,19 @@ public class Board : MonoBehaviour
         CheckGameOver();
     }
 
+    public void switchPlayers()
+    {
+        if (Board.curPlayer == "Player 1")
+        {
+            Board.curPlayer = "Player 2";
+        }
+        else
+        {
+            Board.curPlayer = "Player 1";
+        }
+        curPlayerText.text = curPlayer;
+    }
+
     /// <summary>
     /// checks if user lost
     /// </summary>
@@ -433,36 +446,38 @@ public class Board : MonoBehaviour
     {
          if (Board.isMultiplayer)
         {
-            if (Board.curPlayer == "Player 1")
-            {
-                Board.curPlayer = "Player 2";
-            }
-            else
-            {
-                Board.curPlayer = "Player 1";
-            }
             curPlayerText.text = Board.curPlayer;
 
             if (curScore >= neededScore || remainingMoves == 0 && curScore > curPlayer2Score)
             {
-                SceneManager.LoadScene("MultiplayerWin");
+                SceneManager.LoadScene("GameWon");
+            }
+            else if (curPlayer2Score >= neededScore || remainingMoves == 0 && curScore < curPlayer2Score)
+            {
+                curPlayer = "Player 2";
+                SceneManager.LoadScene("GameWon");
             }
             else if (remainingMoves == 0 && curScore == curPlayer2Score && curScore < neededScore)
             {
                 curPlayer = "Draw";
-                SceneManager.LoadScene("MultiplayerWin");
+                SceneManager.LoadScene("GameWon");
             }
-            else
-            {
-                SceneManager.LoadScene("MultiplayerWin");
-            }
+            switchPlayers();
+            //else
+            //{
+                //SceneManager.LoadScene("GameWon");
+            //}
         }
         else
         {
             if (curScore >= neededScore)
             {
-                SceneManager.LoadScene("GameWon");
-                DistrictSelection.unlockedDistricts++;
+                if (!isMultiplayer)
+                {
+                    SceneManager.LoadScene("GameWon");
+                    DistrictSelection.unlockedDistricts++;
+                }
+                
             }
         }
         if (remainingMoves <= 0)
