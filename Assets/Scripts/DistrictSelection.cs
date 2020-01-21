@@ -33,6 +33,11 @@ public class DistrictSelection : MonoBehaviour
         //Debug.Log("curdistr " + curDistrict);    
     }
 
+    private void Update()
+    {
+        SetDistrictTag();
+    }
+
     public void SetDistrictTag()
     {
         string tag = EventSystem.current.currentSelectedGameObject.tag;
@@ -40,6 +45,7 @@ public class DistrictSelection : MonoBehaviour
         Debug.Log("int tag: " + curDistrict);
         districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
+        
     }
 
     public void ActivateAllButtons()
