@@ -36,7 +36,7 @@ public class DistrictSelection : MonoBehaviour
     public void SetDistrictTag()
     {
         string tag = EventSystem.current.currentSelectedGameObject.tag;
-        curDistrict = int.Parse(tag);
+        curDistrict = int.Parse(tag) - 1;
         Debug.Log("int tag: " + curDistrict);
         districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;

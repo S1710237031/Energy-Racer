@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BackgroundTile
     - Board
+    - CoatOfArmsArray
     - DistrictSelection
     - Dot
     - FindMatches
@@ -66,17 +67,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10708}
+      Script: {instanceID: 10710}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -119,25 +120,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10052}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10474}
+      Script: {instanceID: 10476}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10850}
+      Script: {instanceID: 10852}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11596}
+      Script: {instanceID: 11598}
     - Class: 114
-      Script: {instanceID: 11804}
+      Script: {instanceID: 11806}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 114
-      Script: {instanceID: 12002}
+      Script: {instanceID: 12004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -178,15 +179,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -233,17 +234,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 114
-      Script: {instanceID: 15442}
+      Script: {instanceID: 15568}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -288,17 +289,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10366}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11982}
+      Script: {instanceID: 11964}
+    - Class: 114
+      Script: {instanceID: 11984}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -337,17 +340,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10484}
+      Script: {instanceID: 10486}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -394,15 +397,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -443,17 +446,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9954}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10662}
+      Script: {instanceID: 10664}
     - Class: 114
-      Script: {instanceID: 10692}
+      Script: {instanceID: 10694}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10934}
     - Class: 114
-      Script: {instanceID: 11504}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 11962}
+      Script: {instanceID: 11964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -507,7 +510,7 @@ ScriptsOnlyBuild:
     className: GameWon
   - hash:
       serializedVersion: 2
-      Hash: 0c29d783a8a2ebd1a2c184614df26e39
+      Hash: eb835eb774fa0ed1d684ba4d6d31c521
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DistrictSelection
@@ -703,6 +706,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
+  - hash:
+      serializedVersion: 2
+      Hash: c599249b2ebe1f0c3e650dcb7a392dc9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CoatOfArmsArray
   - hash:
       serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
@@ -1083,7 +1092,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: 9ff9624fcffddc9e59e3554915a1465a
+      Hash: 67d13baed2f88f4448bbd7d0f5a4c7aa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelSelection
@@ -1113,8 +1122,8 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 13
   scenePathNames:
-  - Assets/Scenes/DistrictSelect.unity
   - Assets/Scenes/StartScene.unity
+  - Assets/Scenes/DistrictSelect.unity
   - Assets/Scenes/GameWon.unity
   - Assets/Scenes/Game.unity
   - Assets/Scenes/LevelSelect.unity
