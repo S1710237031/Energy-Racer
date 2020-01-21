@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// manages match finding
+/// </summary>
 public class FindMatches : MonoBehaviour
 {
     private Board board;
@@ -18,6 +21,10 @@ public class FindMatches : MonoBehaviour
         StartCoroutine(FindAllMatchesCo());
     }
 
+    /// <summary>
+    /// finds all matches on board
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FindAllMatchesCo()
     {
         yield return new WaitForSeconds(0.2f);

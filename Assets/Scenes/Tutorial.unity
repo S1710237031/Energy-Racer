@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1161454665}
   - component: {fileID: 1161454664}
   - component: {fileID: 1161454663}
+  - component: {fileID: 1161454667}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -168,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -187,8 +188,8 @@ Canvas:
   m_GameObject: {fileID: 1161454662}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1743473562}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -210,7 +211,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1347314637}
+  - {fileID: 1306199931}
   - {fileID: 2109606137}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -220,6 +221,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1161454667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161454662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 0}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1169990309
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,10 +283,10 @@ RectTransform:
   m_Father: {fileID: 2109606137}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 700, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1169990311
 MonoBehaviour:
@@ -276,19 +307,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 140
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 60
+    m_MinSize: 1
+    m_MaxSize: 140
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Zur\xFCck"
+  m_Text: Back
 --- !u!222 &1169990312
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -297,7 +328,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169990309}
   m_CullTransparentMesh: 0
---- !u!1 &1347314636
+--- !u!1 &1306199930
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,9 +336,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1347314637}
-  - component: {fileID: 1347314639}
-  - component: {fileID: 1347314638}
+  - component: {fileID: 1306199931}
+  - component: {fileID: 1306199933}
+  - component: {fileID: 1306199932}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -315,32 +346,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1347314637
+--- !u!224 &1306199931
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347314636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1306199930}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1161454666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 900, y: 1300}
+  m_AnchorMin: {x: 0.048, y: 0.17077084}
+  m_AnchorMax: {x: 0.95448154, y: 0.9172083}
+  m_AnchoredPosition: {x: -0.14501953, y: 37}
+  m_SizeDelta: {x: 0.29004, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1347314638
+--- !u!114 &1306199932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347314636}
+  m_GameObject: {fileID: 1306199930}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -354,11 +385,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 85
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 60
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -370,20 +401,20 @@ MonoBehaviour:
     Levels sind blau.\n\nIm Spiel musst du benachbarte Symbole miteinander Tauschen,
     damit du 3 oder mehr gleiche in eine Reihe oder Spalte bringst. Gelingt das, verschwinden
     diese Symbole.\n\nZiel des Spiels ist es, das E-Auto mit gr\xFCnen Symbolen aufzuladen
-    und es ans andere Ende zu bringen.\nSind die zusammenpassenden Symbole gr\xFCn,
-    bewegt sich das Auto Richtung Ziel. \nAber Achtung: Wenn du rote Symbole zum Verschwinden
-    bringst, f\xE4hrt das Auto wieder zur\xFCck!\nJe nach aktuellem Wetter erscheinen
+    und es ans andere Ende zu bringen.Sind die zusammenpassenden Symbole gr\xFCn,
+    bewegt sich das Auto Richtung Ziel. Aber Achtung: Wenn du rote Symbole zum Verschwinden
+    bringst, f\xE4hrt das Auto wieder zur\xFCck!\n\nJe nach aktuellem Wetter erscheinen
     mehr oder weniger gr\xFCne und rote Symbole, versuche also das Spiel wenn m\xF6glich
     bei Sch\xF6nwetter zu spielen!\n\nNachdem du einen Level geschafft hast, schaltet
-    sich die n\xE4chste Gemeinde frei.\nWenn dir ein Level Probleme bereitet,  kannst
+    sich die n\xE4chste Gemeinde frei. Wenn dir ein Level Probleme bereitet, kannst
     du Upgrades oder schnellere Autos im Shop kaufen."
---- !u!222 &1347314639
+--- !u!222 &1306199933
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347314636}
+  m_GameObject: {fileID: 1306199930}
   m_CullTransparentMesh: 0
 --- !u!1 &1462000279
 GameObject:
@@ -494,7 +525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a3ed76b2bf6ea4ea500c01c12ba874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
 --- !u!1 &1743473560
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,10 +642,10 @@ RectTransform:
   m_Father: {fileID: 1161454666}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 700, y: 100}
+  m_AnchorMin: {x: 0.18425927, y: 0.05420834}
+  m_AnchorMax: {x: 0.82500005, y: 0.10560417}
+  m_AnchoredPosition: {x: -5, y: -3.5}
+  m_SizeDelta: {x: 8, y: 1.0000076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109606138
 MonoBehaviour:
@@ -684,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8784314, g: 0.58431375, b: 0.0627451, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

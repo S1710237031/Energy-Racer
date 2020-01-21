@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -28,67 +27,94 @@ public class Board : MonoBehaviour
 
     public int clouds;
     public string city;
-    public MonthObject[] monthsArray;
     public double hoursInADay;
     public double Clouds;
     public static int earnedCoins;
     public int curDistr;
     public int level;
 
-    GameObject locationController;
-    LocationService locationService;
+    static GameObject gameController;
+    static LocationService locationService;
 
-    // Start is called before the first frame update
+    public static bool backgroundIsSet;
+
+    /// <summary>
+    /// the game board is initialized, dots and background tiles are created
+    /// </summary>
     void Start()
     {
-        locationController = GameObject.Find("LocationController");
-        LocationPermission permission = locationController.GetComponent<LocationPermission>();
-        permission.Start();
+        backgroundIsSet = false;
 
-        earnedCoins = 30;
-        levelText.text = "coins: " + earnedCoins;
+        gameController = GameObject.Find("GameController");
 
-        locationService = locationController.GetComponent<LocationService>();
-        StartCoroutine(locationService.GetDeviceLocation());
+        earnedCoins = 0;
+        levelText.text = "Coins: " + earnedCoins;
 
         width = 7;
         height = 7;
         allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
 
+        locationService = gameController.GetComponent<LocationService>();
+        locationService.SendWeatherRequest();
+
         if (remainingMoves == 1)
         {
-            movesText.text = remainingMoves + " Zug übrig";
+            movesText.text = remainingMoves + " Move";
         }
         else
         {
-            movesText.text = remainingMoves + " Züge übrig";
+            movesText.text = remainingMoves + " Moves";
         }
-       // slider.maxValue = neededScore;
-       // slider.value = 0;
     }
 
-    // Update is called once per frame
+    /// Update is called once per frame
+    /// <summary>
+    /// set level difficulty, display remaining moves
+    /// </summary>
     public void Update()
     {
-        if(level == 0)
+        /**
+        * if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
+        * {
+        *    int difficulty = LocationService.GetLevelDifficulty();
+        *    SceneBackgroundInformation.SetBackground(difficulty);
+        *  //  backgroundIsSet = true;
+        *}
+        */
+        if (level == 0)
         {
-            locationService = locationController.GetComponent<LocationService>();
-            level = locationService.levelDifficulty;
+            level = GetLevel();
         }
         if (remainingMoves == 1)
         {
-            movesText.text = remainingMoves + " Zug übrig";
+            movesText.text = remainingMoves + " Move";
         }
         else
         {
-            movesText.text = remainingMoves + " Züge übrig";
+            movesText.text = remainingMoves + " Moves";
         }
     }
 
-    public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int level)
+    public int GetLevel()
     {
-        // Setup happens at the end of LocationService Coroutine
+        return level;
+    }
+
+    /// <summary>
+    /// update needed score, moves, and set current score to 0.
+    /// check if upgrade is activated
+    /// fill the game board with dots
+    /// </summary>
+    /// <param name="boardHeight"></param> the game board height
+    /// <param name="boardWidth"></param> the game board width
+    /// <param name="startMoves"></param> the moves 
+    /// <param name="scoreToReach"></param> needed score to win
+    /// <param name="level"></param> 
+    public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int _level)
+    {
+        level = _level;
+        /// Setup happens at the end of LocationService Coroutine
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
@@ -127,7 +153,7 @@ public class Board : MonoBehaviour
                     maxIter++;
                 }
 
-                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
+                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity) as GameObject;
                 dot.GetComponent<Dot>().col = i;
                 dot.GetComponent<Dot>().row = j;
 
@@ -136,39 +162,51 @@ public class Board : MonoBehaviour
                 allDots[i, j] = dot;
             }
         }
-    } // SetUp method
+    } /// SetUp method
 
+    /// <summary>
+    /// sets the dot that is used for the game board
+    /// </summary>
+    /// <param name="_level"></param>
+    /// <returns>a random dot</returns>
     private int SetDotToUse(int _level)
     {
         int dotToUse;
         if (_level == 1)
         {
-            dotToUse = UnityEngine.Random.Range(0, dots.Length - 2);
+            dotToUse = Random.Range(0, dots.Length - 2);
         }
         else if (_level == 2)
         {
-            dotToUse = UnityEngine.Random.Range(1, dots.Length - 2);
+            dotToUse = Random.Range(1, dots.Length - 2);
         }
         else if (_level == 3)
         {
-            dotToUse = UnityEngine.Random.Range(1, dots.Length - 1);
+            dotToUse = Random.Range(1, dots.Length - 1);
         }
         else if (_level == 4)
         {
-            dotToUse = UnityEngine.Random.Range(2, dots.Length - 1);
+            dotToUse = Random.Range(2, dots.Length - 1);
         }
         else if (_level == 5)
         {
-            dotToUse = UnityEngine.Random.Range(2, dots.Length);
+            dotToUse = Random.Range(2, dots.Length);
         }
         else
         {
-            // completely random, when night time or no location
-            dotToUse = UnityEngine.Random.Range(0, dots.Length);
+            /// completely random, when night time or no location
+            dotToUse = Random.Range(0, dots.Length);
         }
         return dotToUse;
-    } // SetDotToUse method
+    } /// SetDotToUse method
 
+    /// <summary>
+    ///  checks if a certain piece is matched
+    /// </summary>
+    /// <param name="col"></param> piece's column
+    /// <param name="row"></param> piece's row
+    /// <param name="piece"></param> the piece
+    /// <returns>true if the dot is matched</returns>
     private bool MatchesAt(int col, int row, GameObject piece)
     {
         if (col > 1 && row > 1)
@@ -203,6 +241,11 @@ public class Board : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// makes matched objects disappear
+    /// </summary>
+    /// <param name="col"></param> the column of matched piece
+    /// <param name="row"></param> the row of matched piece
     private void DestroyMatchesAt(int col, int row)
     {
         if (allDots[col, row].GetComponent<Dot>().isMatched)
@@ -227,6 +270,10 @@ public class Board : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// destroys all matches on board
+    /// check for win
+    /// </summary>
     public void DestroyMatches()
     {
         for (int i = 0; i < width; i++)
@@ -238,11 +285,11 @@ public class Board : MonoBehaviour
                     DestroyMatchesAt(i, j);
                     if (remainingMoves == 1)
                     {
-                        movesText.text = "1 Zug übrig";
+                        movesText.text = "1 Move";
                     }
                     else
                     {
-                        movesText.text = remainingMoves + " Züge übrig";
+                        movesText.text = remainingMoves + " Moves";
                     }
                     if (curScore >= neededScore)
                     {
@@ -254,6 +301,10 @@ public class Board : MonoBehaviour
         StartCoroutine(DecreaseRowCo());
     }
 
+    /// <summary>
+    /// makes pieces fall down when match below disappears
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DecreaseRowCo()
     {
         int nullCount = 0;
@@ -278,6 +329,9 @@ public class Board : MonoBehaviour
         StartCoroutine(FillBoardCo());
     }
 
+    /// <summary>
+    /// spawns new pieces when match disappears
+    /// </summary>
     private void RefillBoard()
     {
         for (int i = 0; i < width; i++)
@@ -297,6 +351,10 @@ public class Board : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// checks if there are matches on board
+    /// </summary>
+    /// <returns>true if matches on board, false if no matches</returns>
     private bool MatchesOnBoard()
     {
         for (int i = 0; i < width; i++)
@@ -315,6 +373,10 @@ public class Board : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// destroys all matches that are still on board after refilling
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FillBoardCo()
     {
         RefillBoard();
@@ -328,6 +390,9 @@ public class Board : MonoBehaviour
         CheckGameOver();
     }
 
+    /// <summary>
+    /// checks if user lost
+    /// </summary>
     public void CheckGameOver()
     {
         if (curScore >= neededScore)
@@ -341,6 +406,9 @@ public class Board : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// manages coins
+    /// </summary>
     public void updateCoins()
     {
         if (remainingMoves < 5)

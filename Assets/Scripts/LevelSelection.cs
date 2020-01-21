@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// manages the level selection scene
+/// </summary>
 public class LevelSelection : MonoBehaviour
 {
+    public static string districtName;
+
     public GameObject button;
     public Text districtText;
-    public static string districtName;
-    //public Image COA_img;
-    //public GameObject[] COAs;
+    public GameObject coatOfArms;
     public Text rowName, rowVal;
+
     private string[] districtInfo;
 
 
@@ -32,7 +33,7 @@ public class LevelSelection : MonoBehaviour
         Vector2 pos = new Vector2(212, 441);
         //GameObject coatOfArms = Instantiate(COAs[0], pos, Quaternion.identity) as GameObject;
         //coatOfArms.transform.parent = transform;
-    */
+        */
         rowName.text = "Postleitzahl \nFläche \nEinwohner \nHöhe";
         districtInfo = new string[27]
         {
@@ -62,15 +63,18 @@ public class LevelSelection : MonoBehaviour
             "4272\n43,72km²\n1 047\n733m",
             "4282\n22,72km²\n1 016\n494m",
             "4262\n25,80km²\n1 015\n630m",
-            "4273\n17,20km²\n622\n842m",
+            "4273\n17,20km²\n6 22\n842m",
         };
 
         int index = DistrictSelection.curDistrict - 1;
+        Debug.Log("Index = " + index);
         rowVal.text = districtInfo[index];
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetCoatOfArms()
     {
+        coatOfArms = GameObject.Find("CoatOfArms");
+       // coatOfArms.sprite = Resources.Load<Sprite>(" /Art/CoatOfArms/" + DistrictSelection.curDistrict);
+       
     }
 }

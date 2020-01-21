@@ -62,21 +62,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scenes\SceneSwitch.cs" />
-    <Compile Include="Assets\Scripts\AllMonths.cs" />
     <Compile Include="Assets\Scripts\BackgroundTile.cs" />
     <Compile Include="Assets\Scripts\Board.cs" />
     <Compile Include="Assets\Scripts\Car.cs" />
     <Compile Include="Assets\Scripts\carShop.cs" />
+    <Compile Include="Assets\Scripts\CoatOfArmsArray.cs" />
+    <Compile Include="Assets\Scripts\District.cs" />
+    <Compile Include="Assets\Scripts\DistrictArray.cs" />
     <Compile Include="Assets\Scripts\DistrictSelection.cs" />
     <Compile Include="Assets\Scripts\Dot.cs" />
     <Compile Include="Assets\Scripts\FindMatches.cs" />
+    <Compile Include="Assets\Scripts\GameWon.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
-    <Compile Include="Assets\Scripts\LocationPermission.cs" />
     <Compile Include="Assets\Scripts\LocationService.cs" />
-    <Compile Include="Assets\Scripts\MonthObject.cs" />
-    <Compile Include="Assets\Scripts\PermissionsDialog.cs" />
-    <Compile Include="Assets\Scripts\PinchZoom.cs" />
+    <Compile Include="Assets\Scripts\PinchableScrollRect.cs" />
+    <Compile Include="Assets\Scripts\SceneBackgroundInformation.cs" />
+    <Compile Include="Assets\Scripts\SceneSwitch.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Upgrade.cs" />
     <None Include="Assets\JsonDotNet\link.xml" />

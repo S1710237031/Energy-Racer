@@ -1,9 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// stores upgrades
+/// </summary>
 public class Upgrade
 {
+    public string upgradeName;
+    public string description;
+    public int cost;
+    public int bonusMoves;
+    public bool owned;
+
+    public Upgrade(string upgradeName, string description, int cost, int bonusMoves, bool owned)
+    {
+        this.upgradeName = upgradeName;
+        this.description = description;
+        this.cost = cost;
+        this.bonusMoves = bonusMoves;
+        this.owned = owned;
+    }
+
+    public static implicit operator int(Upgrade v)
+    {
+        throw new NotImplementedException();
+    }
+    /**
     public string upgradeName;
     public string description;
     public int cost;
@@ -18,5 +40,5 @@ public class Upgrade
         this.bonusMoves = bonusMoves;
         this.owned = "not owned";
     }
-
+    */
 }

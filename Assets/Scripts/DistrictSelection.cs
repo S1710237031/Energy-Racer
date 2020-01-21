@@ -1,46 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
+/// <summary>
+/// manages the district selection scene
+/// </summary>
 public class DistrictSelection : MonoBehaviour
 {
-    public Text coinsText;
+    public Text districtName;
     public static int curDistrict;
     public static int unlockedDistricts;
     public GameObject button;
+    public List<Button> allButtons;
+    public PinchableScrollRect scrollRect;
+    public District[] districts;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// display district name, deactivate buttons for locked levels
+    /// </summary>
     void Start()
     {
-        coinsText.text = "$" + StartGame.coins;
-        if (unlockedDistricts == 0)
-        {
-            unlockedDistricts = 1;
-        }
+        districts = DistrictArray.GetAllDistricts();
 
-        string[] distrNames = {"Freistadt", "Pregarten", "Wartberg",
-        "Neumarkt", "Tragwein", "Königswiesen", "Rainbach", "Bad Zell",
-        "St. Oswald", "Lasberg", "Hagenberg", "Gutau", "Unterweißenbach", "Unterweitersdorf",
-        "Kefermarkt", "Schönau", "Grünbach", "Liebenau", "Windhaag", "Sandl",
-        "St. Leonhard", "Waldburg", "Hirschbach", "Weitersfelden", "Pierbach",
-        "Leopoldschlag", "Kaltenberg"};
-
-        Debug.Log("curdistr " + curDistrict);
-
-        //deactivate locked districts 
-        for (int i = 27; i > unlockedDistricts; i--)
-        {
-            button = GameObject.Find(distrNames[i - 1]);             button.GetComponent<Image>().color = Color.gray;             button.GetComponent<Button>().interactable = false;
-        }
+        curDistrict = 1;
+        SetDistrictTag();
+ 
+        //for (int i = 27; i > unlockedDistricts; i--)
+        //{
+        //    button = GameObject.Find(districts[i - 1].Name);         //    button.GetComponent<Image>().color = Color.gray;         //    button.GetComponent<Button>().interactable = false;
+        //}
+        //Debug.Log("curdistr " + curDistrict);    
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetDistrictTag()
     {
-
+        string tag = EventSystem.current.currentSelectedGameObject.tag;
+        curDistrict = int.Parse(tag);
+        Debug.Log("int tag: " + curDistrict);
+        districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
+        LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
     }
 
+    public void ActivateAllButtons()
+    {
+        foreach(Button b in allButtons)
+        {
+            b.interactable = true;
+        }
+    }
+
+    public void DeactivateAllButtons()
+    {
+        foreach (Button b in allButtons)
+        {
+            b.interactable = false;
+        }
+    } 
 }
 
