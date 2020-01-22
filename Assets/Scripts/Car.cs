@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -10,16 +11,17 @@ public class Car
     public string description;
     public int cost;
     public int movesReduction;
-    public Image img;
+    public Sprite img;
     public bool owned;
 
-    public Car(string carName, string description, int cost, int movesReduction, bool owned)
+    public Car(string carName, string description, int cost, int movesReduction, bool owned, Sprite img)
     {
         this.carName = carName;
         this.description = description;
         this.cost = cost;
         this.movesReduction = movesReduction;
         this.owned = owned;
+        this.img = img;
     }
 
     public static implicit operator int(Car v)

@@ -21,6 +21,7 @@ public class carShop : MonoBehaviour
     public Text car1Title, car2Title, car3Title, car1Cost, car2Cost, car3Cost,
         upgrade1Title, upgrade2Title, upgrade3Title, upgrade1Cost, upgrade2Cost,
         upgrade3Cost;
+    public Sprite[] carImgs;
     private int chosenUpgrade;
     public Car[] cars;
     public Upgrade[] upgrades;
@@ -32,6 +33,7 @@ public class carShop : MonoBehaviour
     /// </summary>
     void Start()
     {
+        Board.carImg = activeCar.img;
         hideConfirmDialog();
         cars = new Car[3];
         upgrades = new Upgrade[3];
@@ -89,10 +91,9 @@ public class carShop : MonoBehaviour
     /// </summary>
     void createItems()
     {
-
-        cars[0] = new Car("Standard Car", "standard car", 0, 0, true);
-        cars[1] = new Car("Sports Car", "-2 needed moves", 200, 2, false);
-        cars[2] = new Car("Super Car", "-3 needed moves", 400, 3, false);
+        cars[0] = new Car("Standard Car", "standard car", 0, 0, true, carImgs[0]);
+        cars[1] = new Car("Sports Car", "-2 needed moves", 200, 2, false, carImgs[1]);
+        cars[2] = new Car("Super Car", "-3 needed moves", 400, 3, false, carImgs[2]);
 
         upgrades[0] = new Upgrade("Extra Move", "1 Move mehr", 75, 1, false);
         upgrades[1] = new Upgrade("Extra Move XL", "2 Moves mehr", 150, 2, false);

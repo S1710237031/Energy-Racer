@@ -32,6 +32,8 @@ public class Board : MonoBehaviour
     public int curDistr;
     public int level;
 
+    public static Sprite carImg;
+
     static GameObject gameController;
     static LocationService locationService;
 
@@ -49,6 +51,7 @@ public class Board : MonoBehaviour
     /// </summary>
     void Start()
     {
+        slider.image.sprite = carImg;
         curPlayer = "Player 1";
         if (isMultiplayer)
         {
