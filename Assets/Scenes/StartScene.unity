@@ -1306,6 +1306,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 0}
+  carImgs:
+  - {fileID: 21300000, guid: 2142af1b2dd5e428db53602c500d78a5, type: 3}
+  - {fileID: 21300000, guid: 26e5189b4441b46059972eb9487fe280, type: 3}
+  - {fileID: 21300000, guid: 9cbdd2e1297854670b8e0d8ebbf1e86e, type: 3}
+  upgradeImgs:
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
 --- !u!114 &1922368510
 MonoBehaviour:
   m_ObjectHideFlags: 0

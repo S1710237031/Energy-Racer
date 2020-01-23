@@ -20,10 +20,7 @@ public class carShop : MonoBehaviour
     public Text[] carCosts;
     public Text[] upgradeTitles;
     public Text[] upgradeCosts;
-    public Sprite[] carImgs;
-    public Sprite[] upgradeImgs;
-    public Car[] cars;
-    public Upgrade[] upgrades;
+    
     public static Car activeCar;
     public Upgrade activeUpgrade;
     public string buttonTag;
@@ -37,10 +34,6 @@ public class carShop : MonoBehaviour
     void Start()
     {
         hideConfirmDialog();
-        cars = new Car[3];
-        upgrades = new Upgrade[3];
-        createItems();
-        GetFromPlayerPrefs();
         coinText.text = "$" + StartGame.coins;
 
         fillTextfields();
@@ -58,42 +51,8 @@ public class carShop : MonoBehaviour
         }
     }
 
-    void GetFromPlayerPrefs()
-    {
-        for (int i = 0; i < cars.Length; i++)
-        {
-            if (PlayerPrefs.GetString(cars[i].carName) == "owned")
-            {
-                cars[i].owned = true;
-            }
-        }
 
-        for (int i = 0; i < upgrades.Length; i++)
-        {
-            if (PlayerPrefs.GetString(upgrades[i].upgradeName) == "owned")
-            {
-                upgrades[i].owned = true;
-            }
-        }
-
-        activeCar = cars[PlayerPrefs.GetInt("activeCar")];
-        activeUpgrade = upgrades[PlayerPrefs.GetInt("activeUpgrade")];
-    }
-
-    /// <summary>
-    /// create all upgrades
-    /// </summary>
-    void createItems()
-    {
-        cars[0] = new Car("Standard Car", "standard car", 0, 0, true, carImgs[0]);
-        cars[1] = new Car("Sports Car", "-2 needed moves", 200, 2, false, carImgs[1]);
-        cars[2] = new Car("Super Car", "-3 needed moves", 400, 3, false, carImgs[2]);
-
-        upgrades[0] = new Upgrade("Extra Move", "1 Move mehr", 75, 1, upgradeImgs[0], false);
-        upgrades[1] = new Upgrade("Extra Move XL", "2 Moves mehr", 150, 2, upgradeImgs[1], false);
-        upgrades[2] = new Upgrade("Extra Move XXL", "3 Moves mehr", 300, 3, upgradeImgs[2], false);
-    }
-
+    
     /// <summary>
     /// display info about upgrades
     /// </summary>
@@ -101,12 +60,12 @@ public class carShop : MonoBehaviour
     {
         for (int i = 0; i < carTitles.Length; i++)
         {
-            fillOutInfo(carTitles[i], carCosts[i], carImages[i], cars[i]);
+            fillOutInfo(carTitles[i], carCosts[i], carImages[i], StartGame.cars[i]);
         }
 
         for (int i = 0; i < upgradeTitles.Length; i++)
         {
-            fillOutInfo(upgradeTitles[i], upgradeCosts[i], upgradeImages[i], upgrades[i]);
+            fillOutInfo(upgradeTitles[i], upgradeCosts[i], upgradeImages[i], StartGame.upgrades[i]);
         }
     }
     /// <summary>
@@ -172,13 +131,13 @@ public class carShop : MonoBehaviour
         var index = Convert.ToInt32(buttonTag) - 1;
 
 
-        if (cars[index].owned)
+        if (StartGame.cars[index].owned)
         {
-            buyText.text = cars[index].carName + " verwenden?";
+            buyText.text = StartGame.cars[index].carName + " verwenden?";
         }
         else
         {
-            buyText.text = cars[index].cost + " Muenzen fuer " + cars[index].carName + " eintauschen?";
+            buyText.text = StartGame.cars[index].cost + " Muenzen fuer " + StartGame.cars[index].carName + " eintauschen?";
         }
 
         buyText.color = Color.black;
@@ -213,15 +172,15 @@ public class carShop : MonoBehaviour
 
     void buyCar(int i)
     {
-        if (validTransaction(cars[i].cost) || cars[i].owned)
+        if (validTransaction(StartGame.cars[i].cost) || StartGame.cars[i].owned)
         {
-            if (!cars[i].owned)
+            if (!StartGame.cars[i].owned)
             {
-                updateCoins(cars[i].cost);
+                updateCoins(StartGame.cars[i].cost);
 
             }
-            addNewCar(cars[i]);
-            activeCar = cars[i];
+            addNewCar(StartGame.cars[i]);
+            activeCar = StartGame.cars[i];
             PlayerPrefs.SetInt("activeCar", i);
             PlayerPrefs.Save();
             fillTextfields();
@@ -234,16 +193,16 @@ public class carShop : MonoBehaviour
 
     void buyUpgrade(int i, Text upgradeTitle, Text upgradeCost)
     {
-        if (validTransaction(upgrades[i].cost) || upgrades[i].owned)
+        if (validTransaction(StartGame.upgrades[i].cost) || StartGame.upgrades[i].owned)
         {
-            if (!upgrades[i].owned)
+            if (!StartGame.upgrades[i].owned)
             {
-                updateCoins(upgrades[i].cost);
+                updateCoins(StartGame.upgrades[i].cost);
 
 
             }
-            addNewUpgrade(upgrades[i]);
-            activeUpgrade = upgrades[i];
+            addNewUpgrade(StartGame.upgrades[i]);
+            activeUpgrade = StartGame.upgrades[i];
             PlayerPrefs.SetInt("activeUpgrade", i);
             PlayerPrefs.Save();
             fillTextfields();
@@ -307,11 +266,11 @@ public class carShop : MonoBehaviour
 
     void AddCarsToPlayerPrefs()
     {
-        for (int i = 0; i < cars.Length; i++)
+        for (int i = 0; i < StartGame.cars.Length; i++)
         {
-            if (cars[i].owned == true)
+            if (StartGame.cars[i].owned == true)
             {
-                PlayerPrefs.SetString(cars[i].carName, "owned");
+                PlayerPrefs.SetString(StartGame.cars[i].carName, "owned");
                 PlayerPrefs.Save();
             }
         }
@@ -319,11 +278,11 @@ public class carShop : MonoBehaviour
 
     void AddUpgradesToPlayerPrefs()
     {
-        for (int i = 0; i < upgrades.Length; i++)
+        for (int i = 0; i < StartGame.upgrades.Length; i++)
         {
-            if (upgrades[i] != null)
+            if (StartGame.upgrades[i] != null)
             {
-                PlayerPrefs.SetString(upgrades[i].upgradeName, "owned");
+                PlayerPrefs.SetString(StartGame.upgrades[i].upgradeName, "owned");
                 PlayerPrefs.Save();
             }
         }

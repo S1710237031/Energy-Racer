@@ -32,6 +32,8 @@ public class Board : MonoBehaviour
     public int curDistr;
     public int level;
 
+    public Car activeCar;
+
     static GameObject gameController;
     static LocationService locationService;
 
@@ -51,7 +53,6 @@ public class Board : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
         curPlayer = "Player 1";
         if (isMultiplayer)
         {
@@ -86,7 +87,7 @@ public class Board : MonoBehaviour
             movesText.text = remainingMoves + " Moves";
         }
 
-        carImg = carShop.activeCar.img;
+        carImg = StartGame.activeCar.img;
         slider.image.sprite = carImg;
     }
 
