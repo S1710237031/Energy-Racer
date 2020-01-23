@@ -51,6 +51,7 @@ public class Board : MonoBehaviour
     /// </summary>
     void Start()
     {
+        
         curPlayer = "Player 1";
         if (isMultiplayer)
         {
