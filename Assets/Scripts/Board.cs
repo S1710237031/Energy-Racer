@@ -32,8 +32,6 @@ public class Board : MonoBehaviour
     public int curDistr;
     public int level;
 
-    public static Sprite carImg;
-
     static GameObject gameController;
     static LocationService locationService;
 
@@ -51,13 +49,12 @@ public class Board : MonoBehaviour
     /// </summary>
     void Start()
     {
-        carImg = carShop.activeCar.img;
-        slider.image.sprite = carImg;
         curPlayer = "Player 1";
         if (isMultiplayer)
         {
-           curPlayerText.text = curPlayer;
-        } else
+            curPlayerText.text = curPlayer;
+        }
+        else
         {
             curPlayerText.text = " ";
             player2Slider.gameObject.SetActive(false);
@@ -448,7 +445,7 @@ public class Board : MonoBehaviour
     /// </summary>
     public void CheckGameOver()
     {
-         if (Board.isMultiplayer)
+        if (Board.isMultiplayer)
         {
             curPlayerText.text = Board.curPlayer;
 
@@ -469,7 +466,7 @@ public class Board : MonoBehaviour
             switchPlayers();
             //else
             //{
-                //SceneManager.LoadScene("GameWon");
+            //SceneManager.LoadScene("GameWon");
             //}
         }
         else
@@ -481,7 +478,7 @@ public class Board : MonoBehaviour
                     SceneManager.LoadScene("GameWon");
                     DistrictSelection.unlockedDistricts++;
                 }
-                
+
             }
         }
         if (remainingMoves <= 0)
