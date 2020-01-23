@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MultiplayerMenu : MonoBehaviour
@@ -19,8 +20,9 @@ public class MultiplayerMenu : MonoBehaviour
     public Image[] player1Select, player2Select;
     public static Sprite player1Sprite, player2Sprite;
     public int[] selectedButtonIndices;
+    public Button localMultiplayerStart;
 
-    public Text test;
+    public Text errorMessage;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +31,35 @@ public class MultiplayerMenu : MonoBehaviour
         splitArrays();
         HideButtonBackgrounds();
         displayCarSelection();
+        errorMessage.enabled = false;
+        localMultiplayerStart.onClick.AddListener(CheckSelection);
         for (int i = 0; i < carButtons.Length; i++)
         {
             carButtons[i].onClick.AddListener(ButtonClicked);
+        }
+    }
+
+    private void CheckSelection()
+    {
+        if(Player1HasSelected() && Player2HasSelected())
+        {
+            Board.isMultiplayer = true;
+            SceneManager.LoadScene("Game");
+        } else
+        {
+            if (!Player1HasSelected() && Player2HasSelected())
+            {
+                errorMessage.text = "Spieler 1, bitte waehle ein Auto";
+            }
+            else if (!Player2HasSelected() && Player1HasSelected())
+            {
+                errorMessage.text = "Spieler 2, bitte waehle ein Auto";
+            }
+            else if (!Player2HasSelected() && !Player1HasSelected())
+            {
+                errorMessage.text = "Bitte waehlt eure Autos";
+            }
+            errorMessage.enabled = true;
         }
     }
 
@@ -108,7 +136,6 @@ public class MultiplayerMenu : MonoBehaviour
             if (Player2HasSelected())
             {
                 RemoveHighlightFromButton(2);
-                test.text = "i"+selectedButtonIndices[1];
                 EnableCar(selectedButtonIndices[1], 1);
             }
             selected[carNumber - 1].enabled = true;
@@ -165,7 +192,6 @@ public class MultiplayerMenu : MonoBehaviour
 
     void EnableCar(int index, int forPlayerNumber)
     {
-        test.text = "i:" + index;
         if (forPlayerNumber == 1)
         {
             player1CarButtons[index - player1CarButtons.Length].interactable = true;
