@@ -47,6 +47,7 @@ public class Board : MonoBehaviour
     public Text curPlayerText;
     public Slider player2Slider;
     public int curPlayer2Score;
+    public string winner;
 
     /// <summary>
     /// the game board is initialized, dots and background tiles are created
@@ -57,6 +58,8 @@ public class Board : MonoBehaviour
         if (isMultiplayer)
         {
             curPlayerText.text = curPlayer;
+            slider.image.sprite = MultiplayerMenu.player1Sprite;
+            player2Slider.image.sprite = MultiplayerMenu.player2Sprite;
         }
         else
         {
@@ -87,8 +90,11 @@ public class Board : MonoBehaviour
             movesText.text = remainingMoves + " Moves";
         }
 
-        carImg = StartGame.activeCar.img;
-        slider.image.sprite = carImg;
+        if (!isMultiplayer)
+        {
+            carImg = StartGame.activeCar.img;
+            slider.image.sprite = carImg;
+        }
     }
 
     /// Update is called once per frame
@@ -459,16 +465,18 @@ public class Board : MonoBehaviour
             if (curScore >= neededScore || remainingMoves == 0 && curScore > curPlayer2Score)
             {
                 SceneManager.LoadScene("GameWon");
+                winner = " ";
             }
-            else if (curPlayer2Score >= neededScore || remainingMoves == 0 && curScore < curPlayer2Score)
+
+
+            else if (curPlayer2Score >= neededScore && curScore < curPlayer2Score)
             {
-                curPlayer = "Player 2";
+                winner = "Player 2";
                 SceneManager.LoadScene("GameWon");
             }
-            else if (remainingMoves == 0 && curScore == curPlayer2Score && curScore < neededScore)
+            else if(remainingMoves == 0 && curScore > neededScore && curPlayer2Score > neededScore)
             {
-                curPlayer = "Draw";
-                SceneManager.LoadScene("GameWon");
+                SceneManager.LoadScene("GameOver");
             }
             switchPlayers();
             //else
