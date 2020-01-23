@@ -48,7 +48,7 @@ public class LocationService : MonoBehaviour
         curDistrictNumber = DistrictSelection.curDistrict;
         DistrictArray.GetAllDistricts();
 
-        curDistrict = DistrictArray.GetDistrict(curDistrictNumber - 1);
+        curDistrict = DistrictArray.GetDistrict(curDistrictNumber);
 
         LAT = curDistrict.Latitude;
         LON = curDistrict.Longitude;
