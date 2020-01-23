@@ -37,6 +37,8 @@ public class Board : MonoBehaviour
 
     public static bool backgroundIsSet;
 
+    public Sprite carImg;
+
     //multiplayer stuff
     public static bool isMultiplayer;
     public static string curPlayer;
@@ -82,6 +84,9 @@ public class Board : MonoBehaviour
         {
             movesText.text = remainingMoves + " Moves";
         }
+
+        carImg = carShop.activeCar.img;
+        slider.image.sprite = carImg;
     }
 
     /// Update is called once per frame

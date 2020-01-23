@@ -43,7 +43,6 @@ public class carShop : MonoBehaviour
         GetFromPlayerPrefs();
         coinText.text = "$" + StartGame.coins;
 
-
         fillTextfields();
         for(int i = 0; i < carButtons.Length; i++)
         {
