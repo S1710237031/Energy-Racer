@@ -178,7 +178,7 @@ public class carShop : MonoBehaviour
         }
         else
         {
-            buyText.text = cars[index].cost + " Münzen für " + cars[index].carName + " eintauschen?";
+            buyText.text = cars[index].cost + " Muenzen fuer " + cars[index].carName + " eintauschen?";
         }
 
         buyText.color = Color.black;

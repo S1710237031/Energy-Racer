@@ -16,6 +16,10 @@ public class WinScene : MonoBehaviour
         {
             winnerText.text = Board.curPlayer;
             winText.text = "gewinnt!";
+        } else
+        {
+            winnerText.text = "Du hast";
+            winText.text = "verloren!";
         }
     }
 
