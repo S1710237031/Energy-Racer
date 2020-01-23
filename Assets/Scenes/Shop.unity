@@ -1580,28 +1580,49 @@ MonoBehaviour:
   buyText: {fileID: 201530371}
   yesButton: {fileID: 1187640356}
   noButton: {fileID: 68518692}
-  car1Button: {fileID: 556633442}
-  car2Button: {fileID: 1862025041}
-  car3Button: {fileID: 1903405855}
-  upgrade1Button: {fileID: 379275981}
+  carButtons:
+  - {fileID: 556633442}
+  - {fileID: 1862025041}
+  - {fileID: 1903405855}
+  upgradeButtons:
+  - {fileID: 379275981}
+  - {fileID: 1273693819}
+  - {fileID: 1710560931}
   upgrade2Button: {fileID: 1273693819}
   upgrade3Button: {fileID: 1710560931}
-  car1Title: {fileID: 827193545}
-  car2Title: {fileID: 901541839}
-  car3Title: {fileID: 315933600}
-  car1Cost: {fileID: 1648266175}
-  car2Cost: {fileID: 167982888}
-  car3Cost: {fileID: 1322024898}
-  upgrade1Title: {fileID: 809231324}
-  upgrade2Title: {fileID: 1064227507}
-  upgrade3Title: {fileID: 1700362463}
-  upgrade1Cost: {fileID: 382147066}
-  upgrade2Cost: {fileID: 801098620}
-  upgrade3Cost: {fileID: 1418429667}
+  carTitles:
+  - {fileID: 827193545}
+  - {fileID: 901541839}
+  - {fileID: 315933600}
+  carCosts:
+  - {fileID: 1648266175}
+  - {fileID: 167982888}
+  - {fileID: 1322024898}
+  upgradeTitles:
+  - {fileID: 809231324}
+  - {fileID: 1064227507}
+  - {fileID: 1700362463}
+  upgradeCosts:
+  - {fileID: 382147066}
+  - {fileID: 801098620}
+  - {fileID: 1418429667}
   carImgs:
   - {fileID: 21300000, guid: 789a41cdc86ec4618ba0321f2dbe8151, type: 3}
   - {fileID: 21300000, guid: 9cbdd2e1297854670b8e0d8ebbf1e86e, type: 3}
   - {fileID: 21300000, guid: 2142af1b2dd5e428db53602c500d78a5, type: 3}
+  upgradeImgs:
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
+  - {fileID: 21300000, guid: f7a0491ce2b4d41f9a48d28f9944ce85, type: 3}
+  buttonTag: 
+  carImages:
+  - {fileID: 556633443}
+  - {fileID: 1862025042}
+  - {fileID: 1903405856}
+  upgradeImages:
+  - {fileID: 379275982}
+  - {fileID: 1273693820}
+  - {fileID: 1710560932}
 --- !u!1 &1064227505
 GameObject:
   m_ObjectHideFlags: 0

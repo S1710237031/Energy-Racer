@@ -51,6 +51,7 @@ public class Board : MonoBehaviour
     /// </summary>
     void Start()
     {
+        carImg = carShop.activeCar.img;
         slider.image.sprite = carImg;
         curPlayer = "Player 1";
         if (isMultiplayer)
