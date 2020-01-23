@@ -644,16 +644,29 @@
       <Project>{01729BEB-38B3-94D0-873E-F22C19EB806A}</Project>
       <Name>UnityEditor.TestRunner</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{E08C0643-0A13-BF9B-F68E-2FDBBB855F02}</Project>
-      <Name>UnityEngine.TestRunner</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages\com.unity.ide.rider\Editor\Discovery.cs" />
-    <Compile Include="Packages\com.unity.ide.rider\Editor\ProjectGeneration.cs" />
-    <Compile Include="Packages\com.unity.ide.rider\Editor\RiderScriptEditor.cs" />
-    <Compile Include="Packages\com.unity.ide.rider\Editor\Utility.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Discovery.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\EditorPluginInterop.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\LoggingLevel.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\PluginSettings.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\PostProcessors\RiderAssetPostprocessor.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\ProjectGeneration\FileIOProvider.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\ProjectGeneration\GUIDProvider.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\ProjectGeneration\ProjectGeneration.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\RiderInitializer.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\RiderScriptEditor.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\RiderScriptEditorData.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\UnitTesting\CallbackData.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\UnitTesting\CallbackInitializer.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\UnitTesting\RiderTestRunner.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\UnitTesting\TestEvent.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\UnitTesting\TestsCallback.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Util\CommandLineParser.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Util\FileSystemUtil.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Util\LibcNativeInterop.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Util\RiderMenu.cs" />
+    <Compile Include="Packages\com.unity.ide.rider\Rider\Editor\Util\UnityUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />

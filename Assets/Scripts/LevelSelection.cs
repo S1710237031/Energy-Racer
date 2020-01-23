@@ -25,16 +25,7 @@ public class LevelSelection : MonoBehaviour
         }
         districtText.text = districtName;
 
-        //Image img = COAs[0].GetComponent<Image>();
-        /**if (img == null)
-        {
-            Debug.Log("Null");
-        }
-        Vector2 pos = new Vector2(212, 441);
-        //GameObject coatOfArms = Instantiate(COAs[0], pos, Quaternion.identity) as GameObject;
-        //coatOfArms.transform.parent = transform;
-        */
-        rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe";
+        rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe \nPhotovoltaik pro Einwohner";
         districtInfo = new string[27]
         {
             "4240\n12,86km²\n7 960\n560m",
@@ -66,9 +57,8 @@ public class LevelSelection : MonoBehaviour
             "4273\n17,20km²\n6 22\n842m",
         };
 
-        int index = DistrictSelection.curDistrict - 1;
-        Debug.Log("Index = " + index);
-        rowVal.text = districtInfo[index];
+        int index = DistrictSelection.curDistrict;
+        rowVal.text = districtInfo[index] + "\n" + DistrictArray.DisrictArr[index].PVs;
     }
 
     public void SetCoatOfArms()
