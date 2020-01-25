@@ -292,6 +292,7 @@ public class Board : MonoBehaviour
                 if (!isMultiplayer || curPlayer == "Player 1")
                 {
                     curScore++;
+                    
                 }
                 else
                 {
@@ -303,10 +304,12 @@ public class Board : MonoBehaviour
                 if (!isMultiplayer || curPlayer == "Player 1")
                 {
                     curScore--;
+
                 }
                 else
                 {
                     curPlayer2Score--;
+
                 }
             }
             slider.value = curScore;
@@ -450,7 +453,6 @@ public class Board : MonoBehaviour
         {
             Board.curPlayer = "Player 1";
         }
-        curPlayerText.text = curPlayer;
     }
 
     /// <summary>
@@ -478,11 +480,6 @@ public class Board : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver");
             }
-            switchPlayers();
-            //else
-            //{
-            //SceneManager.LoadScene("GameWon");
-            //}
         }
         else
         {

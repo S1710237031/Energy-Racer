@@ -19,31 +19,9 @@ public class SceneSwitch : MonoBehaviour
 
     public void GotoGameScene()
     {
-        if (SceneManager.GetActiveScene().name == "MultiplayerMenu")
-        {
-            Board.isMultiplayer = true;
-        }
-        else
-        {
-            Board.isMultiplayer = false;
-        }
+        Board.isMultiplayer = SceneManager.GetActiveScene().name == "MultiplayerMenu" || (SceneManager.GetActiveScene().name == "GameWon" && Board.isMultiplayer) || (SceneManager.GetActiveScene().name == "GameOver" && Board.isMultiplayer);
 
         SceneManager.LoadScene("Game");
-    }
-
-    public void Update()
-    {
-       // backgroundIsSet = false;
-       // if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
-      //  {
-
-            //if (backgroundIsSet == false)
-            //{
-            //    int difficulty = LocationService.GetLevelDifficulty();
-           //     SceneBackgroundInformation.SetBackground(difficulty);
-            //    backgroundIsSet = true;
-          //  }
-       // }
     }
 
     public void GotoGameOverScene()

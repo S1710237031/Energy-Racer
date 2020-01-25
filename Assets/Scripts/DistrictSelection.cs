@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +13,10 @@ public class DistrictSelection : MonoBehaviour
     public static int curDistrict;
     public static int unlockedDistricts;
     public GameObject button;
-    public List<Button> allButtons;
+    public Button[] allButtons;
     public PinchableScrollRect scrollRect;
     public District[] districts;
+    public static District selectedDistrict;
 
     /// <summary>
     /// display district name, deactivate buttons for locked levels
@@ -22,24 +24,37 @@ public class DistrictSelection : MonoBehaviour
     void Start()
     {
         districts = DistrictArray.GetAllDistricts();
-
-        curDistrict = 1;
-        SetDistrictTag();
- 
-        //for (int i = 27; i > unlockedDistricts; i--)
-        //{
-        //    button = GameObject.Find(districts[i - 1].Name);         //    button.GetComponent<Image>().color = Color.gray;         //    button.GetComponent<Button>().interactable = false;
-        //}
-        //Debug.Log("curdistr " + curDistrict);    
+        if(curDistrict == 0)
+        {
+            curDistrict = 1;
+        }
+        
+        hideDistricts();
+        SetOnClickListener();
     }
 
-    public void SetDistrictTag()
+    void hideDistricts()
     {
-        string tag = EventSystem.current.currentSelectedGameObject.tag;
-        curDistrict = int.Parse(tag) - 1;
-        Debug.Log("int tag: " + curDistrict);
-        districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
-        LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
+        for (int i = districts.Length; i > curDistrict; i--)
+        {
+            button = GameObject.Find(districts[i-1].name);
+            button.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    void SetOnClickListener()
+    {
+        foreach(var btn in allButtons)
+        {
+            btn.onClick.AddListener(SetClickedDistrict);
+        }
+    }
+
+    public void SetClickedDistrict()
+    {
+        int selected = Convert.ToInt32(EventSystem.current.currentSelectedGameObject.tag);
+        selectedDistrict = districts[selected-1];
+        districtName.text = selectedDistrict.name;
     }
 
     public void ActivateAllButtons()

@@ -50,14 +50,14 @@ public class LocationService : MonoBehaviour
 
         curDistrict = DistrictArray.GetDistrict(curDistrictNumber);
 
-        LAT = curDistrict.Latitude;
-        LON = curDistrict.Longitude;
+        LAT = curDistrict.latitude;
+        LON = curDistrict.longitude;
         Debug.Log("Coord: " + LAT + "/" + LON);
 
-        GetWeatherData(curDistrict.Latitude, curDistrict.Longitude);
+        GetWeatherData(curDistrict.latitude, curDistrict.longitude);
         SetLevelDifficulty();
         SetNeededScore();
-        location.text = curDistrict.Name;
+        location.text = curDistrict.name;
         level.text = "STUFE: " + levelDifficulty.ToString();
         board.Setup(7, 7, 20, neededScore, levelDifficulty);
     } /// GetDeviceLocation method
@@ -330,7 +330,7 @@ public class LocationService : MonoBehaviour
     {
         double dayTime = GetDayTimeHours();
         double howCloudy = 100 - double.Parse(Clouds);
-        double dailyTotal = (dayTime * howCloudy) / curDistrict.PVs;
+        double dailyTotal = (dayTime * howCloudy) / curDistrict.pvs;
         return dailyTotal;
     }  /// GetDailyTotal method
 }

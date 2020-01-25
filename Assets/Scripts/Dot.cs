@@ -129,7 +129,7 @@ using UnityEngine;
         }
 
         StartCoroutine(CheckMoveCo());
-
+        board.switchPlayers();
         board.updateCoins();     }
 
     /// <summary>
