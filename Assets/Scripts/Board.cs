@@ -312,9 +312,20 @@ public class Board : MonoBehaviour
 
                 }
             }
+
+            if(curScore < 0)
+            {
+                curScore = 0;
+            }
+
             slider.value = curScore;
+
             if (isMultiplayer)
             {
+                if(curPlayer2Score < 0)
+                {
+                    curPlayer2Score = 0;
+                }
                 player2Slider.value = curPlayer2Score;
             }
             Destroy(allDots[col, row]);
