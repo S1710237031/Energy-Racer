@@ -101,4 +101,9 @@ public class SceneSwitch : MonoBehaviour
     {
         SceneManager.LoadScene("Shop");
     }
+
+    public void EndGame()
+    {
+        Application.Quit();
+    }
 }

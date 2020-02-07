@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// manages the level selection scene
@@ -7,11 +8,12 @@ using UnityEngine.UI;
 public class LevelSelection : MonoBehaviour
 {
     public static string districtName;
+    public static int districtNum;
 
     public GameObject button;
     public Text districtText;
     public GameObject coatOfArms;
-    public Text rowName, rowVal;
+    public Text lat, lon, area, residents, pvas;
 
     private string[] districtInfo;
 
@@ -21,11 +23,11 @@ public class LevelSelection : MonoBehaviour
     {
         if (districtName == null)
         {
-            districtName = "error";
+            districtName = "Nichts gefunden";
         }
         districtText.text = districtName;
 
-        rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe \nPhotovoltaik pro Einwohner";
+        ///rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe \nPhotovoltaik pro Einwohner";
         districtInfo = new string[27]
         {
             "4240\n12,86km²\n7 960\n560m",
@@ -56,15 +58,23 @@ public class LevelSelection : MonoBehaviour
             "4262\n25,80km²\n1 015\n630m",
             "4273\n17,20km²\n6 22\n842m",
         };
+        int index = districtNum;
+        /// rowVal.text = districtInfo[index] + "\n" + DistrictArray.DisrictArr[index].PVs;
 
-        int index = DistrictSelection.curDistrict;
-        rowVal.text = districtInfo[index] + "\n" + DistrictArray.DisrictArr[index].PVs;
+        lat.text = "Laengengrad: " + 
+            Math.Round(DistrictArray.DisrictArr[index].Latitude, 2);
+        lon.text = "Breitengrad: " + 
+            Math.Round(DistrictArray.DisrictArr[index].Longitude, 2);
+        area.text = "Flaeche: " + 
+            Math.Round(DistrictArray.DisrictArr[index].Area, 2) + "km²";
+        residents.text = "Einwohnerzahl: " 
+            + DistrictArray.DisrictArr[index].Residents;
+        pvas.text = "PV-Anlagen pro Einwohner: " 
+            + Math.Round(DistrictArray.DisrictArr[index].PVs);
     }
 
     public void SetCoatOfArms()
     {
-        coatOfArms = GameObject.Find("CoatOfArms");
-       // coatOfArms.sprite = Resources.Load<Sprite>(" /Art/CoatOfArms/" + DistrictSelection.curDistrict);
-       
+        coatOfArms = GameObject.Find("CoatOfArms"); 
     }
 }

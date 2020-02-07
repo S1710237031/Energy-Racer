@@ -22,40 +22,16 @@ public class DistrictSelection : MonoBehaviour
     void Start()
     {
         districts = DistrictArray.GetAllDistricts();
-
         curDistrict = 1;
-        SetDistrictTag();
- 
-        //for (int i = 27; i > unlockedDistricts; i--)
-        //{
-        //    button = GameObject.Find(districts[i - 1].Name);         //    button.GetComponent<Image>().color = Color.gray;         //    button.GetComponent<Button>().interactable = false;
-        //}
-        //Debug.Log("curdistr " + curDistrict);    
     }
 
-    public void SetDistrictTag()
+    public void SelectDistrictTag()
     {
         string tag = EventSystem.current.currentSelectedGameObject.tag;
         curDistrict = int.Parse(tag) - 1;
-        Debug.Log("int tag: " + curDistrict);
         districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
+        LevelSelection.districtNum = curDistrict;
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
     }
-
-    public void ActivateAllButtons()
-    {
-        foreach(Button b in allButtons)
-        {
-            b.interactable = true;
-        }
-    }
-
-    public void DeactivateAllButtons()
-    {
-        foreach (Button b in allButtons)
-        {
-            b.interactable = false;
-        }
-    } 
 }
 

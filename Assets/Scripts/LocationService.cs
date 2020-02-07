@@ -45,7 +45,7 @@ public class LocationService : MonoBehaviour
     {
         SetDefaultCoords();
         SetUpBoard();
-        curDistrictNumber = DistrictSelection.curDistrict;
+        curDistrictNumber = LevelSelection.districtNum;
         DistrictArray.GetAllDistricts();
 
         curDistrict = DistrictArray.GetDistrict(curDistrictNumber);
@@ -58,63 +58,42 @@ public class LocationService : MonoBehaviour
         SetLevelDifficulty();
         SetNeededScore();
         location.text = curDistrict.Name;
-        level.text = "STUFE: " + levelDifficulty.ToString();
+        level.text = "LEVEL: " + levelDifficulty.ToString();
+        level.color = SetLevelTextColor();
         board.Setup(7, 7, 20, neededScore, levelDifficulty);
     } /// GetDeviceLocation method
 
-    /**
-    if (!Input.location.isEnabledByUser)
+    private Color32 SetLevelTextColor()
     {
-        location.text = "SERVICE NOT ENABLED";
-        board.Setup(7, 7, 20, 15, 6);
-        yield break;
+        Color32 c = new Color32(0, 0, 0, 255);
+        switch (levelDifficulty)
+        {
+            case 1:
+                /// easy = green
+                c = new Color32(20, 180, 80, 255);
+                break;
+            case 2:
+                /// less easy = blue
+                c = new Color32(66, 160, 222, 255);
+                break;
+            case 3:
+                /// middle = purple
+                c = new Color(166, 66, 222, 255);
+                break;
+            case 4:
+                /// bit harder = orange
+                c = new Color(222, 122, 70, 255);
+                break;
+            case 5:
+                /// hard = red
+                c = new Color(190, 30, 5, 255);
+                break;
+            default:
+                break;
+        }
+        /// night with level 6 or default = black
+        return c;
     }
-    else
-    {
-        location.text = "ENABLED";
-        // Start service before querying location
-        Input.location.Start(1, 0.5f);
-
-        // Wait until service initializes
-        int maxWait = 5000;
-        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-        {
-            location.text = "LOADING";
-            yield return new WaitForSeconds(1);
-            maxWait--;
-        }
-
-        // Service didn't initialize in 5 seconds
-        if (Input.location.status == LocationServiceStatus.Initializing && maxWait == 1)
-        {
-            location.text = "INITIALIZING";
-        }
-
-        // Connection has failed
-        if (Input.location.status == LocationServiceStatus.Failed)
-        {
-            location.text = "FAILED";
-            yield break;
-        }
-
-        // Connection was successful
-        if (Input.location.status == LocationServiceStatus.Running)
-        {
-            // Access granted and location value could be retrieved
-            LAT = Input.location.lastData.latitude;
-            LON = Input.location.lastData.longitude;
-            TIME = Input.location.lastData.timestamp;
-
-            GetWeatherData(LAT, LON);
-            SetLevelDifficulty();
-            SetNeededScore();
-            location.text = City;
-            level.text = "STUFE: " + levelDifficulty.ToString();
-            board.Setup(7, 7, 20, neededScore, levelDifficulty);
-        }
-        // Stop service if there is no need to query location updates continuously
-        Input.location.Stop();
-    } */
 
     /// <summary>
     /// sends request to OpenWeatherMap API for weather data at device location
@@ -126,7 +105,8 @@ public class LocationService : MonoBehaviour
             /**
              * https://api.openweathermap.org/data/2.5/weather?lat=48.5113&lon=14.5048&APPID=1fd19b4506a1e2fc4127a81babde32e9
     */
-            string url = string.Format("https://api.openweathermap.org/data/2.5/weather?lat=" + _lat + "&lon=" + _lon + "&APPID=" + APPID);
+            string url = string.Format("https://api.openweathermap.org/data/2.5/weather?lat=" 
+                + _lat + "&lon=" + _lon + "&APPID=" + APPID);
             var json = webClient.DownloadString(url);
             var result = JSON.Parse(json);
 
@@ -152,26 +132,23 @@ public class LocationService : MonoBehaviour
         double dailyTotal = GetDailyTotal();
         if (CHECKSUN == true)
         {
+            Debug.Log("daily total: " + dailyTotal);
             if (dailyTotal != 0)
-            {
-                if (dailyTotal > 0.00 && dailyTotal <= 0.25) {
+            {               
+                if (dailyTotal > 0.00 && dailyTotal <= 25.00) {
                     levelDifficulty = 1;
                 }
-                if (dailyTotal > 0.25 && dailyTotal <= 0.50) {
+                if (dailyTotal > 25.00 && dailyTotal <= 50.00) {
                     levelDifficulty = 2;
                 }
-                if (dailyTotal > 0.50 && dailyTotal <= 0.75) {
+                if (dailyTotal > 50.00 && dailyTotal <= 75.00) {
                     levelDifficulty = 3;
                 }
-                if (dailyTotal > 0.75 && dailyTotal <= 0.100) {
+                if (dailyTotal > 75.00 && dailyTotal <= 100.00) {
                     levelDifficulty = 4;
                 }
-                if (dailyTotal > 0.100 && dailyTotal <= 1.25) {
+                if (dailyTotal > 100) {
                     levelDifficulty = 5;
-                }
-                if (dailyTotal > 0.100 && dailyTotal <= 1.25)
-                {
-                    levelDifficulty = 6;
                 }
             }
         }
@@ -240,8 +217,8 @@ public class LocationService : MonoBehaviour
         }
         else
         {
-            /// CHANGE TO True FOR TESTING PURPOSES
-            CHECKSUN = true;
+            /// should be FALSE, change TO True FOR TESTING PURPOSES
+            CHECKSUN = false;
         }
     } /// SetCheckSun method
 
@@ -259,7 +236,8 @@ public class LocationService : MonoBehaviour
     } /// UnixTimestampToDateTime method
 
     /// <summary>
-    /// calculates how many hours are in a day
+    /// sets the average number of hours in a day
+    /// depending on the current month
     /// </summary>
     /// <returns>number of hours</returns>
     private double GetDayTimeHours()
@@ -329,8 +307,10 @@ public class LocationService : MonoBehaviour
     public double GetDailyTotal()
     {
         double dayTime = GetDayTimeHours();
-        double howCloudy = 100 - double.Parse(Clouds);
-        double dailyTotal = (dayTime * howCloudy) / curDistrict.PVs;
+
+        /// sunny = 100 - current cloud percentage
+        double howSunny = 100 - double.Parse(Clouds);
+        double dailyTotal = (dayTime * howSunny) / curDistrict.PVs;
         return dailyTotal;
     }  /// GetDailyTotal method
 }

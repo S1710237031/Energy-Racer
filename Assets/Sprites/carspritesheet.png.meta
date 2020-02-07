@@ -110,12 +110,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 47
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -125,10 +125,10 @@ TextureImporter:
       name: carspritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1375
-        height: 625
+        x: 58
+        y: 2
+        width: 1294
+        height: 616
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,7 +136,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 709e433f6ab9a864680f99b8addd464e
+      spriteID: 54e341485b634bd4b9c45d85b1719fc3
       internalID: 6043063165340948255
       vertices: []
       indices: 
@@ -146,10 +146,10 @@ TextureImporter:
       name: carspritesheet_1
       rect:
         serializedVersion: 2
-        x: 1375
-        y: 0
-        width: 1375
-        height: 625
+        x: 1417
+        y: 7
+        width: 1297
+        height: 606
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,7 +157,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15b00cb6c443d8e48985e9919e000e3c
+      spriteID: 3dfc4c2b8d2664141906a5d2ff472b05
       internalID: 1672861149936414617
       vertices: []
       indices: 
@@ -167,10 +167,10 @@ TextureImporter:
       name: carspritesheet_2
       rect:
         serializedVersion: 2
-        x: 2750
-        y: 0
-        width: 1375
-        height: 625
+        x: 2776
+        y: 2
+        width: 1297
+        height: 612
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 321abb14d96ac09458990845bc76d858
+      spriteID: 63b85a58a50f96f4e9580f17b63fa396
       internalID: -408517590368715031
       vertices: []
       indices: 
@@ -188,9 +188,9 @@ TextureImporter:
       name: carspritesheet_3
       rect:
         serializedVersion: 2
-        x: 4125
+        x: 4137
         y: 0
-        width: 1375
+        width: 1297
         height: 625
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -199,7 +199,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cb5da53abb5f0a4f9b36e2f7fbff61f
+      spriteID: ef642f06266b6ad41a88ca1ae5dd28da
       internalID: 5683925617071243175
       vertices: []
       indices: 

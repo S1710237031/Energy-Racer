@@ -18,8 +18,8 @@ public class WinScene : MonoBehaviour
             winText.text = "gewinnt!";
         } else
         {
-            winnerText.text = "Du hast";
-            winText.text = "verloren!";
+            winnerText.text = "Gewonnen!";
+            winText.text = "";
         }
     }
 
