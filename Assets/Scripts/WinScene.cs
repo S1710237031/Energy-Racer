@@ -10,6 +10,7 @@ public class WinScene : MonoBehaviour
     public static string winner;
     public Image winnerCarImg;
     public GameObject carCharacter;
+    public Text pointsText;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,12 @@ public class WinScene : MonoBehaviour
             if (Board.curPlayer == "Player 1")
             {
                 winnerCarImg.sprite = MultiplayerMenu.player1Sprite;
+                pointsText.text = Board.curScore + " Punkte";
             }
             else
             {
                 winnerCarImg.sprite = MultiplayerMenu.player2Sprite;
+                pointsText.text = Board.curPlayer2Score + " Punkte";
             }
             winnerText.text = Board.curPlayer;
             winText.text = "gewinnt!";
@@ -33,13 +36,8 @@ public class WinScene : MonoBehaviour
             winnerCarImg.enabled = false;
             winnerText.text = "Du hast";
             winText.text = "gewonnen!";
+            pointsText.text = Board.curScore + " Punkte";
+        }
 
-    }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
