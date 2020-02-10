@@ -6,6 +6,7 @@ public class GameWon : MonoBehaviour
 {
     public GameObject confettiObj;
     public Sprite sprite;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -19,5 +20,7 @@ public class GameWon : MonoBehaviour
         */
 
         Destroy(obj, 6.0f);
+
+
     }
 }
