@@ -24,6 +24,7 @@ public class DistrictSelection : MonoBehaviour
     void Start()
     {
         districts = DistrictArray.GetAllDistricts();
+<<<<<<< HEAD
         if(curDistrict == 0)
         {
             curDistrict = 1;
@@ -55,22 +56,18 @@ public class DistrictSelection : MonoBehaviour
         int selected = Convert.ToInt32(EventSystem.current.currentSelectedGameObject.tag);
         selectedDistrict = districts[selected-1];
         districtName.text = selectedDistrict.name;
+=======
+        curDistrict = 1;
     }
 
-    public void ActivateAllButtons()
+    public void SelectDistrictTag()
     {
-        foreach(Button b in allButtons)
-        {
-            b.interactable = true;
-        }
+        string tag = EventSystem.current.currentSelectedGameObject.tag;
+        curDistrict = int.Parse(tag) - 1;
+        districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
+        LevelSelection.districtNum = curDistrict;
+        LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
     }
-
-    public void DeactivateAllButtons()
-    {
-        foreach (Button b in allButtons)
-        {
-            b.interactable = false;
-        }
-    } 
 }
 

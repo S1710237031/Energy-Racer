@@ -81,8 +81,14 @@ public class SceneSwitch : MonoBehaviour
         SceneManager.LoadScene("Shop");
     }
 
+<<<<<<< HEAD
     public void GoToLeaderboard()
     {
         SceneManager.LoadScene("Leaderboard");
+=======
+    public void EndGame()
+    {
+        Application.Quit();
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
     }
 }

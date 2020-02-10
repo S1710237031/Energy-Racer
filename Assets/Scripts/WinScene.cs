@@ -33,10 +33,15 @@ public class WinScene : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
             winnerCarImg.enabled = false;
             winnerText.text = "Du hast";
             winText.text = "gewonnen!";
             pointsText.text = Board.curScore + " Punkte";
+=======
+            winnerText.text = "Gewonnen!";
+            winText.text = "";
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
         }
 
     }

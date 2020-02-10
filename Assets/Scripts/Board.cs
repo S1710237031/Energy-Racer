@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
     static GameObject gameController;
     static LocationService locationService;
 
-    public static bool backgroundIsSet;
+  //  public static bool backgroundIsSet;
 
     public Sprite carImg;
 
@@ -67,11 +67,11 @@ public class Board : MonoBehaviour
             curPlayerText.text = " ";
             player2Slider.gameObject.SetActive(false);
         }
-        backgroundIsSet = false;
+  //      backgroundIsSet = false;
 
         gameController = GameObject.Find("GameController");
 
-        earnedCoins = 30;
+        earnedCoins = 0;
         levelText.text = "Coins: " + earnedCoins;
 
         width = 7;
@@ -159,7 +159,6 @@ public class Board : MonoBehaviour
             player2Slider.value = 0;
         }
 
-
         if (upgrade != null)
         {
             remainingMoves += upgrade.bonusMoves;
@@ -197,6 +196,7 @@ public class Board : MonoBehaviour
 
                 dot.transform.parent = transform;
                 dot.name = i + ", " + j;
+                Debug.Log("dot tag" + dot.tag + "; dot.name: " + dot.name) ;
                 allDots[i, j] = dot;
             }
         }
@@ -275,7 +275,6 @@ public class Board : MonoBehaviour
                 }
             }
         }
-
         return false;
     }
 
@@ -291,14 +290,26 @@ public class Board : MonoBehaviour
             if (allDots[col, row].tag == "Battery" || allDots[col, row].tag == "Sun" ||
                 allDots[col, row].tag == "Plug")
             {
-                if (!isMultiplayer || curPlayer == "Player 1")
+                if (isMultiplayer)
                 {
+<<<<<<< HEAD
                     curScore++;
                     
+=======
+                    if (curPlayer == "Player 1")
+                    {
+                        curScore++;
+                    }
+                    else
+                    {
+                        curPlayer2Score++;
+                    }
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
                 }
                 else
                 {
-                    curPlayer2Score++;
+                    curScore++;
+                    slider.value = curScore;
                 }
             }
             else if (allDots[col, row].tag == "Rain" || allDots[col, row].tag == "Cloud")
@@ -313,6 +324,7 @@ public class Board : MonoBehaviour
                     curPlayer2Score--;
 
                 }
+<<<<<<< HEAD
             }
 
             if(curScore < 0)
@@ -329,6 +341,14 @@ public class Board : MonoBehaviour
                     curPlayer2Score = 0;
                 }
                 player2Slider.value = curPlayer2Score;
+=======
+
+                slider.value = curScore;
+                if (isMultiplayer)
+                {
+                    player2Slider.value = curPlayer2Score;
+                }
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
             }
             Destroy(allDots[col, row]);
             allDots[col, row] = null;
@@ -493,6 +513,10 @@ public class Board : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver");
             }
+<<<<<<< HEAD
+=======
+            switchPlayers();
+>>>>>>> cd7757dfb1eb09fa6645993220e161143440f34e
         }
         else
         {
@@ -503,15 +527,12 @@ public class Board : MonoBehaviour
                     SceneManager.LoadScene("GameWon");
                     DistrictSelection.unlockedDistricts++;
                 }
-
             }
         }
         if (remainingMoves <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
-
-
     }
 
     /// <summary>
