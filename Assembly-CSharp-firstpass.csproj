@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\SimpleJSON.cs" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/anna/Documents/Energy-Racer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -294,6 +296,12 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.2.5f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>/Users/anna/Documents/Energy-Racer/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>/Users/anna/Documents/Energy-Racer/Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>/Users/anna/Documents/Energy-Racer/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
