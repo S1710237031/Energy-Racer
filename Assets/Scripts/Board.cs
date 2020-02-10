@@ -12,17 +12,18 @@ public class Board : MonoBehaviour
     private BackgroundTile[,] allTiles;
     public GameObject[] dots;
     public GameObject[,] allDots;
-    public int curScore;
+    public static int curScore;
     public int neededScore;
     public Text levelText;
     public Text movesText;
     public Text neededScoreText;
-    public int remainingMoves;
+    public static int remainingMoves;
     public bool gameOver;
     public bool gameWon;
     public Slider slider;
     public static Car car;
     public static Upgrade upgrade;
+    public static int startingMoves;
 
     public int clouds;
     public string city;
@@ -46,7 +47,7 @@ public class Board : MonoBehaviour
     public static string curPlayer;
     public Text curPlayerText;
     public Slider player2Slider;
-    public int curPlayer2Score;
+    public static int curPlayer2Score;
     public string winner;
 
     /// <summary>
@@ -146,6 +147,7 @@ public class Board : MonoBehaviour
         /// Setup happens at the end of LocationService Coroutine
         curScore = 0;
         neededScore = scoreToReach;
+        startingMoves = startMoves;
         remainingMoves = startMoves;
 
         slider.maxValue = neededScore;
