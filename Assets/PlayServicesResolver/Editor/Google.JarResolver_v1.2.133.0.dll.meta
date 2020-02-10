@@ -1,12 +1,9 @@
 fileFormatVersion: 2
 guid: d8f9bea4c1344c3cbfa0f38647598774
-<<<<<<< Updated upstream
-=======
 labels:
 - gvh
 - gvh_targets-editor
 - gvh_version-1.2.133.0
->>>>>>> Stashed changes
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
