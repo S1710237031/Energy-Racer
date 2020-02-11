@@ -18,12 +18,18 @@ public class CoatOfArmsArray : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "DistrictSelect")
         {
-            coatOfArmsImg.sprite = GetCoatOfArms(DistrictSelection.curDistrict);
+           // coatOfArmsImg.sprite = GetCoatOfArms(DistrictSelection.curDistrict);
+           // Debug.Log("coat of arms: " + DistrictSelection.curDistrict);
         }
         if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
             coatOfArmsImg.sprite = GetCoatOfArms(LevelSelection.districtNum);
         }
+    }
 
+    public void SetCoatOfArms()
+    {
+        coatOfArmsImg.sprite = GetCoatOfArms(DistrictSelection.curDistrict);
+        Debug.Log("coat of arms: " + DistrictSelection.curDistrict);
     }
 }

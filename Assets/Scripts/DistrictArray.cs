@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public static class DistrictArray
 {
@@ -21,7 +22,7 @@ public static class DistrictArray
             SetAllDistricts();
         }
 
-        if(_index == 0 && Board.isMultiplayer)
+        if (_index == 0 && Board.isMultiplayer)
         {
             _index = 1;
         }
@@ -68,32 +69,32 @@ public static class DistrictArray
         District weitersfelden = new District("Weitersfelden", 48.4779, 14.7265, 1047, 19.19, 43.72);
         District windhaag = new District("Windhaag", 48.5862, 14.5615, 1567, 29.77, 42.83);
 
-        DisrictArr[0] = freistadt;
-        DisrictArr[1] = pregarten;
-        DisrictArr[2] = wartberg;
-        DisrictArr[3] = neumarkt;
-        DisrictArr[4] = tragwein;
-        DisrictArr[5] = koenigswiesen;
-        DisrictArr[6] = rainbach;
-        DisrictArr[7] = badZell;
-        DisrictArr[8] = sanktOswald;
-        DisrictArr[9] = lasberg;
-        DisrictArr[10] = hagenberg;
-        DisrictArr[11] = gutau;
-        DisrictArr[12] = unterweissenbach;
-        DisrictArr[13] = unterweitersdorf;
-        DisrictArr[14] = kefermarkt;
-        DisrictArr[15] = schoenau;
-        DisrictArr[16] = gruenbach;
-        DisrictArr[17] = liebenau;
-        DisrictArr[18] = windhaag;
-        DisrictArr[19] = sandl;
-        DisrictArr[20] = sanktLeonhard;
-        DisrictArr[21] = waldburg;
-        DisrictArr[22] = hirschbach;
-        DisrictArr[23] = weitersfelden;
-        DisrictArr[24] = pierbach;
-        DisrictArr[25] = leopoldschlag;
-        DisrictArr[26] = kaltenberg;
+        DisrictArr[0] = windhaag;
+        DisrictArr[1] = hirschbach;
+        DisrictArr[2] = pierbach;
+        DisrictArr[3] = leopoldschlag;
+        DisrictArr[4] = schoenau;
+        DisrictArr[5] = kaltenberg;
+        DisrictArr[6] = sanktLeonhard;
+        DisrictArr[7] = gutau;
+        DisrictArr[8] = unterweissenbach;
+        DisrictArr[9] = tragwein;
+        DisrictArr[10] = sandl;
+        DisrictArr[11] = badZell;
+        DisrictArr[12] = unterweitersdorf;
+        DisrictArr[13] = weitersfelden;
+        DisrictArr[14] = wartberg;
+        DisrictArr[15] = sanktOswald;
+        DisrictArr[16] = pregarten;
+        DisrictArr[17] = lasberg;
+        DisrictArr[18] = waldburg;
+        DisrictArr[19] = neumarkt;
+        DisrictArr[20] = kefermarkt;
+        DisrictArr[21] = rainbach;
+        DisrictArr[22] = gruenbach;
+        DisrictArr[23] = freistadt;
+        DisrictArr[24] = hagenberg;
+        DisrictArr[25] = koenigswiesen;
+        DisrictArr[26] = liebenau;    
     }
 }

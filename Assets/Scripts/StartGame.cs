@@ -33,9 +33,8 @@ public class StartGame : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
         {
-            int difficulty = LocationService.GetLevelDifficulty();
+            int difficulty = WeatherService.GetLevelDifficulty();
             SceneBackgroundInformation.SetBackground(difficulty);
-            //  backgroundIsSet = true;
         }
     }
 
@@ -74,11 +73,5 @@ public class StartGame : MonoBehaviour
         upgrades[0] = new Upgrade("Extra Move", "1 Move mehr", 75, 1, upgradeImgs[0], false);
         upgrades[1] = new Upgrade("Extra Move XL", "2 Moves mehr", 150, 2, upgradeImgs[1], false);
         upgrades[2] = new Upgrade("Extra Move XXL", "3 Moves mehr", 300, 3, upgradeImgs[2], false);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

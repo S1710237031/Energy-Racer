@@ -35,7 +35,7 @@ public class Board : MonoBehaviour
     public Car activeCar;
 
     static GameObject gameController;
-    static LocationService locationService;
+    static WeatherService weatherService;
 
   //  public static bool backgroundIsSet;
 
@@ -63,7 +63,6 @@ public class Board : MonoBehaviour
             curPlayerText.text = " ";
             player2Slider.gameObject.SetActive(false);
         }
-  //      backgroundIsSet = false;
 
         gameController = GameObject.Find("GameController");
 
@@ -75,8 +74,8 @@ public class Board : MonoBehaviour
         allTiles = new BackgroundTile[width, height];
         allDots = new GameObject[width, height];
 
-        locationService = gameController.GetComponent<LocationService>();
-        locationService.SendWeatherRequest();
+        weatherService = gameController.GetComponent<WeatherService>();
+        weatherService.SendWeatherRequest();
 
         if (remainingMoves == 1)
         {
@@ -97,14 +96,6 @@ public class Board : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        /**
-        * if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
-        * {
-        *    int difficulty = LocationService.GetLevelDifficulty();
-        *    SceneBackgroundInformation.SetBackground(difficulty);
-        *  //  backgroundIsSet = true;
-        *}
-        */
         if (level == 0)
         {
             level = GetLevel();
@@ -137,7 +128,7 @@ public class Board : MonoBehaviour
     public void Setup(int boardHeight, int boardWidth, int startMoves, int scoreToReach, int _level)
     {
         level = _level;
-        /// Setup happens at the end of LocationService Coroutine
+        /// Setup happens at the end of WeatherService Coroutine
         curScore = 0;
         neededScore = scoreToReach;
         remainingMoves = startMoves;
@@ -145,11 +136,13 @@ public class Board : MonoBehaviour
         slider.maxValue = neededScore;
         slider.value = 0;
 
+        /**
         if (isMultiplayer)
         {
             player2Slider.maxValue = neededScore;
             player2Slider.value = 0;
         }
+        */
 
         if (upgrade != null)
         {
@@ -188,7 +181,7 @@ public class Board : MonoBehaviour
 
                 dot.transform.parent = transform;
                 dot.name = i + ", " + j;
-                Debug.Log("dot tag" + dot.tag + "; dot.name: " + dot.name) ;
+                ///Debug.Log("dot tag" + dot.tag + "; dot.name: " + dot.name) ;
                 allDots[i, j] = dot;
             }
         }
@@ -201,6 +194,7 @@ public class Board : MonoBehaviour
     /// <returns>a random dot</returns>
     private int SetDotToUse(int _level)
     {
+        Debug.Log("set DotToUse level: " + _level);
         int dotToUse;
         if (_level == 1)
         {
@@ -225,6 +219,7 @@ public class Board : MonoBehaviour
         else
         {
             /// completely random, when night time or no location
+            Debug.Log("Random dot used");
             dotToUse = Random.Range(0, dots.Length);
         }
         return dotToUse;
@@ -393,6 +388,7 @@ public class Board : MonoBehaviour
                 if (allDots[i, j] == null)
                 {
                     Vector2 tempPos = new Vector2(i, j + offset);
+                    Debug.Log("Refill board level: " + level);
                     int dotToUse = SetDotToUse(level);
                     GameObject piece = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
                     allDots[i, j] = piece;
@@ -510,7 +506,6 @@ public class Board : MonoBehaviour
         {
             earnedCoins = 20;
         }
-
         levelText.text = "coins: " + earnedCoins;
     }
 }

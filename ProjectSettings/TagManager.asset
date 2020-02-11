@@ -51,6 +51,8 @@ TagManager:
   - Blue
   - Green
   - CoatOfArms
+  - DistrictPanel
+  - Content
   layers:
   - Default
   - TransparentFX

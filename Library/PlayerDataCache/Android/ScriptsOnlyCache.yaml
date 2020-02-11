@@ -9,10 +9,10 @@ ScriptsOnlyBuild:
     - FindMatches
     - GameWon
     - LevelSelection
-    - LocationService
     - PinchableScrollRect
     - SceneSwitch
     - StartGame
+    - WeatherService
     - WinScene
     - carShop
     Unity.2D.Sprite.Editor.dll:
@@ -260,7 +260,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 63352}
+      Script: {instanceID: 41300}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -526,7 +526,7 @@ ScriptsOnlyBuild:
     className: GameWon
   - hash:
       serializedVersion: 2
-      Hash: eb835eb774fa0ed1d684ba4d6d31c521
+      Hash: dbecef837e09605f104567fe450a2ff3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DistrictSelection
@@ -1012,10 +1012,10 @@ ScriptsOnlyBuild:
     className: NetworkAnimator
   - hash:
       serializedVersion: 2
-      Hash: b2cc0fb252290a6c2c94174874f1fbea
+      Hash: 164e6114c4c81f9d012752a3f0f75136
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: LocationService
+    className: WeatherService
   - hash:
       serializedVersion: 2
       Hash: df434544c9f7b33d1cc7e635b180d279
@@ -1146,4 +1146,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/GameOver.unity
   - Assets/Scenes/Shop.unity
   - Assets/Scenes/Tutorial.unity
-  playerPath: C:/Users/User/Documents/HAGENBERG/Energy-Racer/build003.aab
+  playerPath: C:/Users/User/Documents/HAGENBERG/Energy-Racer/build004.aab

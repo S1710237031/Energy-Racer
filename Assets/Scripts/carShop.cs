@@ -129,7 +129,7 @@ public class carShop : MonoBehaviour
         var selected = EventSystem.current.currentSelectedGameObject;
         buttonTag = selected.tag;
         var index = Convert.ToInt32(buttonTag) - 1;
-
+        Debug.Log("index: " + index);
 
         if (StartGame.cars[index].owned)
         {
@@ -228,6 +228,8 @@ public class carShop : MonoBehaviour
             }
             if (index >= carTitles.Length && index < carTitles.Length + upgradeTitles.Length)
             {
+
+                Debug.Log("index: " + index);
                 buyUpgrade(index, upgradeTitles[index], upgradeCosts[index]);
             }
         }

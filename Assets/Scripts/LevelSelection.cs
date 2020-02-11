@@ -27,7 +27,6 @@ public class LevelSelection : MonoBehaviour
         }
         districtText.text = districtName;
 
-        ///rowName.text = "Postleitzahl \nFlaeche \nEinwohner \nHoehe \nPhotovoltaik pro Einwohner";
         districtInfo = new string[27]
         {
             "4240\n12,86km²\n7 960\n560m",
@@ -59,8 +58,9 @@ public class LevelSelection : MonoBehaviour
             "4273\n17,20km²\n6 22\n842m",
         };
         int index = districtNum;
-        /// rowVal.text = districtInfo[index] + "\n" + DistrictArray.DisrictArr[index].PVs;
 
+        pvas.text = "PV-Anlagen auf 1000 Einwohner: "
+            + Math.Round(DistrictArray.DisrictArr[index].PVs);
         lat.text = "Laengengrad: " + 
             Math.Round(DistrictArray.DisrictArr[index].Latitude, 2);
         lon.text = "Breitengrad: " + 
@@ -69,8 +69,7 @@ public class LevelSelection : MonoBehaviour
             Math.Round(DistrictArray.DisrictArr[index].Area, 2) + "km²";
         residents.text = "Einwohnerzahl: " 
             + DistrictArray.DisrictArr[index].Residents;
-        pvas.text = "PV-Anlagen pro Einwohner: " 
-            + Math.Round(DistrictArray.DisrictArr[index].PVs);
+        
     }
 
     public void SetCoatOfArms()

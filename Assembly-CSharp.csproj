@@ -74,13 +74,13 @@
     <Compile Include="Assets\Scripts\FindMatches.cs" />
     <Compile Include="Assets\Scripts\GameWon.cs" />
     <Compile Include="Assets\Scripts\LevelSelection.cs" />
-    <Compile Include="Assets\Scripts\LocationService.cs" />
     <Compile Include="Assets\Scripts\MultiplayerMenu.cs" />
     <Compile Include="Assets\Scripts\PinchableScrollRect.cs" />
     <Compile Include="Assets\Scripts\SceneBackgroundInformation.cs" />
     <Compile Include="Assets\Scripts\SceneSwitch.cs" />
     <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Upgrade.cs" />
+    <Compile Include="Assets\Scripts\WeatherService.cs" />
     <Compile Include="Assets\Scripts\WinScene.cs" />
     <None Include="Assets\JsonDotNet\link.xml" />
     <Reference Include="Unity.Timeline.Editor">
