@@ -130,23 +130,23 @@ public class carShop : MonoBehaviour
         buttonTag = selected.tag;
         var index = Convert.ToInt32(buttonTag) - 1;
         Debug.Log("index: " + index);
-
+      
         if (StartGame.cars[index].owned)
         {
             buyText.text = StartGame.cars[index].carName + " verwenden?";
         }
         else
         {
-            buyText.text = StartGame.cars[index].cost + " Muenzen fuer " + StartGame.cars[index].carName + " eintauschen?";
+            buyText.text = "Gegen " + StartGame.cars[index].carName + " Muenzen eintauschen?";
         }
-
+    
         if (StartGame.upgrades[index].owned)
         {
             buyText.text = StartGame.upgrades[index].upgradeName + " verwenden?";
         }
         else
         {
-            buyText.text = StartGame.upgrades[index].cost + " Muenzen fuer " + StartGame.upgrades[index].cost + " eintauschen?";
+            buyText.text = "Gegen " + StartGame.upgrades[index].cost + " Muenzen eintauschen?";
         }
 
         buyText.color = Color.black;
@@ -237,7 +237,6 @@ public class carShop : MonoBehaviour
             }
             if (index >= carTitles.Length && index < carTitles.Length + upgradeTitles.Length)
             {
-
                 Debug.Log("index: " + index);
                 buyUpgrade(index);
             }

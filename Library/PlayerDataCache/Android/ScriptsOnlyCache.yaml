@@ -259,8 +259,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11998}
     - Class: 114
       Script: {instanceID: 12026}
-    - Class: 114
-      Script: {instanceID: 41300}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1146,4 +1144,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/GameOver.unity
   - Assets/Scenes/Shop.unity
   - Assets/Scenes/Tutorial.unity
-  playerPath: C:/Users/User/Documents/HAGENBERG/Energy-Racer/build004.aab
+  playerPath: C:/Users/User/Documents/HAGENBERG/Energy-Racer/test.apk

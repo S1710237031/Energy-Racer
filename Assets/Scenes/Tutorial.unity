@@ -385,29 +385,31 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 85
+    m_FontSize: 0
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 20
+    m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Wenn du auf \u201CSpielen\u201D klickst, erscheint eine Karte vom Bezirk
-    Freistadt. W\xE4hle nun eines der freigeschalteten Levels aus. Freigeschaltete
-    Levels sind blau.\n\nIm Spiel musst du benachbarte Symbole miteinander Tauschen,
-    damit du 3 oder mehr gleiche in eine Reihe oder Spalte bringst. Gelingt das, verschwinden
-    diese Symbole.\n\nZiel des Spiels ist es, das E-Auto mit gr\xFCnen Symbolen aufzuladen
-    und es ans andere Ende zu bringen.Sind die zusammenpassenden Symbole gr\xFCn,
-    bewegt sich das Auto Richtung Ziel. Aber Achtung: Wenn du rote Symbole zum Verschwinden
-    bringst, f\xE4hrt das Auto wieder zur\xFCck!\n\nJe nach aktuellem Wetter erscheinen
-    mehr oder weniger gr\xFCne und rote Symbole, versuche also das Spiel wenn m\xF6glich
-    bei Sch\xF6nwetter zu spielen!\n\nNachdem du einen Level geschafft hast, schaltet
-    sich die n\xE4chste Gemeinde frei. Wenn dir ein Level Probleme bereitet, kannst
-    du Upgrades oder schnellere Autos im Shop kaufen."
+    Freistadt. W\xE4hle einen der Bezirke aus - einfache Levels sind gr\xFCn, schwierige
+    Levels sind rot. \n\nIm Spiel kannst du benachbarte Symbole miteinander tauschen,
+    um 3 oder mehrerer gleiche Symbole in eine Reihe zu bringen. Gelingt das, verschwinden
+    sie und neue kommen nach.\n\nZiel des Spiels ist es, das E-Auto mit gr\xFCnen
+    Symbolen aufzuladen und es ans andere Ende zu bringen. Sind die zusammenpassenden
+    Symbole gr\xFCn, bewegt sich das Auto Richtung Ziel. Aber Achtung: Wenn du rote
+    Symbole zum Verschwinden bringst, f\xE4hrt das Auto wieder zur\xFCck! Blaue Symbole
+    haben auf das Auto keine Auswirkung, aber sie k\xF6nnen dabei helfen, neue Symbole
+    zu bekommen. \n\nJe nach aktuellem Wetter erscheinen mehr oder weniger gr\xFCne
+    und rote Symbole, versuche also das Spiel wenn m\xF6glich bei Sch\xF6nwetter zu
+    spielen! Umso weniger Z\xFCge du brauchst, um ans Ziel zu gelangen, desto mehr
+    M\xFCnzen kannst du gewinnen. Wenn dir ein Level Probleme bereitet, kannst du
+    sie im Shop gegen Upgrades oder schnellere Auto-Modelle eintauschen."
 --- !u!222 &1306199933
 CanvasRenderer:
   m_ObjectHideFlags: 0

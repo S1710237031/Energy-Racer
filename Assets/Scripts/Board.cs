@@ -181,7 +181,6 @@ public class Board : MonoBehaviour
 
                 dot.transform.parent = transform;
                 dot.name = i + ", " + j;
-                ///Debug.Log("dot tag" + dot.tag + "; dot.name: " + dot.name) ;
                 allDots[i, j] = dot;
             }
         }
@@ -194,32 +193,30 @@ public class Board : MonoBehaviour
     /// <returns>a random dot</returns>
     private int SetDotToUse(int _level)
     {
-        Debug.Log("set DotToUse level: " + _level);
         int dotToUse;
         if (_level == 1)
         {
-            dotToUse = Random.Range(0, dots.Length - 2);
+            dotToUse = Random.Range(0, dots.Length - 3);
         }
         else if (_level == 2)
         {
-            dotToUse = Random.Range(1, dots.Length - 2);
+            dotToUse = Random.Range(0, dots.Length - 2);
         }
         else if (_level == 3)
         {
-            dotToUse = Random.Range(1, dots.Length - 1);
+            dotToUse = Random.Range(1, dots.Length - 2);
         }
         else if (_level == 4)
         {
-            dotToUse = Random.Range(2, dots.Length - 1);
+            dotToUse = Random.Range(1, dots.Length - 1);
         }
         else if (_level == 5)
         {
-            dotToUse = Random.Range(2, dots.Length);
+            dotToUse = Random.Range(1, dots.Length);
         }
         else
         {
             /// completely random, when night time or no location
-            Debug.Log("Random dot used");
             dotToUse = Random.Range(0, dots.Length);
         }
         return dotToUse;
@@ -294,7 +291,7 @@ public class Board : MonoBehaviour
                     slider.value = curScore;
                 }
             }
-            else if (allDots[col, row].tag == "Rain" || allDots[col, row].tag == "Cloud")
+            else if (allDots[col, row].tag == "Rain" || allDots[col, row].tag == "Cloud" || allDots[col, row].tag == "Thunderstorm")
             {
                 if (!isMultiplayer || curPlayer == "Player 1")
                 {
@@ -340,6 +337,8 @@ public class Board : MonoBehaviour
                     }
                     if (curScore >= neededScore)
                     {
+                        PlayerPrefs.SetInt("coins", earnedCoins);
+                        PlayerPrefs.Save();
                         SceneManager.LoadScene("GameWon");
                     }
                 }
@@ -388,7 +387,6 @@ public class Board : MonoBehaviour
                 if (allDots[i, j] == null)
                 {
                     Vector2 tempPos = new Vector2(i, j + offset);
-                    Debug.Log("Refill board level: " + level);
                     int dotToUse = SetDotToUse(level);
                     GameObject piece = Instantiate(dots[dotToUse], tempPos, Quaternion.identity);
                     allDots[i, j] = piece;

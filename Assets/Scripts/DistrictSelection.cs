@@ -33,7 +33,7 @@ public class DistrictSelection : MonoBehaviour
     {
         string tag = EventSystem.current.currentSelectedGameObject.tag;
         curDistrict = int.Parse(tag) - 1;
-        districtName.text = DistrictArray.GetDistrict(curDistrict).Name;
+        districtName.text = tag + ". " + DistrictArray.GetDistrict(curDistrict).Name;
         SetDistrictPanelColor(DistrictArray.GetDistrict(curDistrict).IsOverHalf);
         LevelSelection.districtNum = curDistrict;
         LevelSelection.districtName = EventSystem.current.currentSelectedGameObject.name;

@@ -49,19 +49,19 @@ public class WeatherService : MonoBehaviour
         SetUpBoard();
         curDistrictNumber = LevelSelection.districtNum;
         DistrictArray.GetAllDistricts();
-
         curDistrict = DistrictArray.GetDistrict(curDistrictNumber);
 
         LAT = curDistrict.Latitude;
         LON = curDistrict.Longitude;
-        Debug.Log("Coord: " + LAT + "/" + LON);
 
         GetWeatherData(curDistrict.Latitude, curDistrict.Longitude);
+
         SetLevelDifficulty();
-        SetNeededScore();
         SetMovesToFinish();
-        location.text = curDistrict.Name;
+        neededScore = 12;
         SetLeveLDifficultyText();
+
+        location.text = curDistrict.Name;
         board.Setup(7, 7, movesToFinish, neededScore, levelDifficulty);
     } /// GetDeviceLocation method
 
@@ -105,6 +105,8 @@ public class WeatherService : MonoBehaviour
     ///</summary>
     private void SetLeveLDifficultyText()
     {
+        ///Debug.Log("level difficulty: " + levelDifficulty);
+
         switch (levelDifficulty)
         {
             case 1:
@@ -128,7 +130,7 @@ public class WeatherService : MonoBehaviour
             default:
                 break;
         }
-        level.color = SetLevelTextColor();
+        level.color = SetLevelTextColor();   
     }
 
     /// <summary>
@@ -167,35 +169,41 @@ public class WeatherService : MonoBehaviour
     {
         return levelDifficulty;
     }
+    
     /// <summary>
     /// chooses level difficulty according to weather data
     /// </summary>
     public void SetLevelDifficulty()
     {
         SetCheckSun();
-        double dailyTotal = GetDailyTotal();
+        double currentOutput = GetCurrentTotal();
+       /// Debug.Log("currentOutput: " + currentOutput);
         if (CHECKSUN == true)
         {
-            Debug.Log("DAILY TOTAL: " + dailyTotal);
-            if (dailyTotal != 0)
+            if (currentOutput != 0)
             {
-                if (dailyTotal < 2978 && dailyTotal >= 2381)
+                double MaxOutput = DistrictArray.Max;
+                double PartialOutput = MaxOutput / 5;
+                if (currentOutput < MaxOutput && currentOutput >= (MaxOutput - PartialOutput))
                 {
                     levelDifficulty = 1;
                 }
-                if (dailyTotal < 2381 && dailyTotal >= 1785)
+                if (currentOutput < (MaxOutput - PartialOutput) &&
+                    currentOutput >= (MaxOutput - PartialOutput * 2))
                 {
                     levelDifficulty = 2;
                 }
-                if (dailyTotal < 1785 && dailyTotal >= 1190)
+                if (currentOutput < (MaxOutput - PartialOutput * 2) && 
+                    currentOutput >= (MaxOutput - PartialOutput * 3))
                 {
                     levelDifficulty = 3;
                 }
-                if (dailyTotal < 1190 && dailyTotal >= 595)
+                if (currentOutput < (MaxOutput - PartialOutput * 3) && 
+                    currentOutput >= (MaxOutput - PartialOutput * 4))
                 {
                     levelDifficulty = 4;
                 }
-                if (dailyTotal < 595)
+                if (currentOutput < (MaxOutput - PartialOutput * 4))
                 {
                     levelDifficulty = 5;
                 }
@@ -236,37 +244,6 @@ public class WeatherService : MonoBehaviour
                 break;
         }
     }
-
-    /// <summary>
-    /// sets score needed to complete level
-    /// </summary>
-    private void SetNeededScore()
-    {
-        switch (levelDifficulty)
-        {
-            case 1:
-                neededScore = 12;
-                break;
-            case 2:
-                neededScore = 15;
-                break;
-            case 3:
-                neededScore = 18;
-                break;
-            case 4:
-                neededScore = 21;
-                break;
-            case 5:
-                neededScore = 24;
-                break;
-            case 6:
-                neededScore = 30;
-                break;
-            default:
-                break;
-
-        }
-    } /// SetNeededScore;
 
     /// <summary>
     /// sets default coordinates in case location goes wrong
@@ -365,34 +342,19 @@ public class WeatherService : MonoBehaviour
                 break;
         }
         return dayTimeHours;
-        /**
-        double sunriseHour = sunrise.Hour;
-        double sunriseMinutes = (sunriseHour * 60) + sunrise.Minute;
-        double sunriseSeconds = (sunriseMinutes * 60) + sunrise.Second;
-
-        double sunsetHour = sunset.Hour;
-        double sunsetMinutes = (sunsetHour * 60) + sunset.Minute;
-        double sunsetSeconds = (sunsetMinutes * 60) + sunset.Second;
-
-        double dayTimeSeconds = (sunsetSeconds - sunriseSeconds);
-        float dayTimeMinutes = (float)(dayTimeSeconds / 60);
-        float dayTimeHours = dayTimeMinutes / 60;
-    */
     } /// GetDayTimeHours method
 
     /// <summary>
     /// calculates sum of usful daily hours
     /// </summary>
-    public double GetDailyTotal()
+    public double GetCurrentTotal()
     {
-        /// double dayTime = GetDayTimeHours();
-        ///  Debug.Log("dayTime: " + dayTime);
-        /// variable sunny = 100 - current cloud percentage
         double howSunny = 100 - double.Parse(Clouds);
-        Debug.Log("howSunny: " + howSunny);
-
-        double dailyTotal = howSunny * curDistrict.PVs;
-        return dailyTotal;
+       /// Debug.Log("howSunny: " + howSunny);
+      ///  Debug.Log("output: " + curDistrict.PvOutput + " in " + curDistrict.Name);
+        howSunny /= 100;
+        double currentOutput = howSunny * curDistrict.PvOutput;
+        return currentOutput;
     }  /// GetDailyTotal method
 }
 

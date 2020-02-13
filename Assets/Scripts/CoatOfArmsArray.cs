@@ -16,11 +16,6 @@ public class CoatOfArmsArray : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "DistrictSelect")
-        {
-           // coatOfArmsImg.sprite = GetCoatOfArms(DistrictSelection.curDistrict);
-           // Debug.Log("coat of arms: " + DistrictSelection.curDistrict);
-        }
         if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
             coatOfArmsImg.sprite = GetCoatOfArms(LevelSelection.districtNum);
@@ -30,6 +25,5 @@ public class CoatOfArmsArray : MonoBehaviour
     public void SetCoatOfArms()
     {
         coatOfArmsImg.sprite = GetCoatOfArms(DistrictSelection.curDistrict);
-        Debug.Log("coat of arms: " + DistrictSelection.curDistrict);
     }
 }

@@ -34,7 +34,7 @@ using UnityEngine;
     /// finds matches, changes color of matched dots
     /// </summary>     void Update()
     {
-        FindMatches();
+       /// FindMatches();
         if (isMatched)
         {
             SpriteRenderer spriteRender = GetComponent<SpriteRenderer>();             spriteRender.color = new Color(0f, 0f, 0f, .2f);
@@ -140,8 +140,11 @@ using UnityEngine;
         {
             GameObject leftDot1 = board.allDots[col - 1, row];             GameObject rightDot1 = board.allDots[col + 1, row];             if (leftDot1 != null && rightDot1 != null)
             {
-                if (leftDot1.tag == this.gameObject.tag && this.gameObject.tag == rightDot1.tag)
+                if (leftDot1.tag == this.gameObject.tag && rightDot1.tag == this.gameObject.tag)
                 {
+                    Debug.Log("THIS DOT: " + col + ", " + row + ", Tag: " + this.gameObject.tag);
+                    Debug.Log("left Dot: " + board.allDots[col - 1, row] + ", Tag: " + leftDot1.tag);
+                    Debug.Log("right Dot: " + board.allDots[col + 1, row] + ", Tag: " + rightDot1.tag);
                     leftDot1.GetComponent<Dot>().isMatched = true;
                     rightDot1.GetComponent<Dot>().isMatched = true;
                     this.isMatched = true;
@@ -154,6 +157,9 @@ using UnityEngine;
             {
                 if (upDot1.tag == this.gameObject.tag && this.gameObject.tag == downDot1.tag)
                 {
+                    Debug.Log("THIS DOT: " + col + ", " + row + ", Tag: " + this.gameObject.tag);
+                    Debug.Log("up Dot: " + board.allDots[col, row + 1] + ", Tag: " + upDot1.tag);
+                    Debug.Log("down Dot: " + board.allDots[col, row - 1] + ", Tag: " + downDot1.tag);
                     upDot1.GetComponent<Dot>().isMatched = true;
                     downDot1.GetComponent<Dot>().isMatched = true;
                     this.isMatched = true;

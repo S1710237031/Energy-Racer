@@ -28,8 +28,7 @@ public class StartGame : MonoBehaviour
         upgrades = new Upgrade[3];
         coins = new int();
         createItems();
-        GetFromPlayerPrefs();
-        
+        GetFromPlayerPrefs();       
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
         {
@@ -40,6 +39,7 @@ public class StartGame : MonoBehaviour
 
     void GetFromPlayerPrefs()
     {
+        coins = PlayerPrefs.GetInt("coins");
         for (int i = 0; i < cars.Length; i++)
         {
             if (PlayerPrefs.GetString(cars[i].carName) == "owned")
@@ -55,10 +55,8 @@ public class StartGame : MonoBehaviour
                 upgrades[i].owned = true;
             }
         }
-
         activeCar = cars[PlayerPrefs.GetInt("activeCar")];
         activeUpgrade = upgrades[PlayerPrefs.GetInt("activeUpgrade")];
-
     }
 
     /// <summary>
@@ -67,7 +65,7 @@ public class StartGame : MonoBehaviour
     void createItems()
     {
         cars[0] = new Car("Standard Car", "standard car", 0, 0, true, carImgs[0]);
-        cars[1] = new Car("Sports Car", "-2 needed moves", 200, 2, false, carImgs[1]);
+        cars[1] = new Car("Sports", "-2 needed moves", 200, 2, false, carImgs[1]);
         cars[2] = new Car("Super Car", "-3 needed moves", 400, 3, false, carImgs[2]);
 
         upgrades[0] = new Upgrade("Extra Move", "1 Move mehr", 75, 1, upgradeImgs[0], false);
