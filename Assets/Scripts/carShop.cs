@@ -140,6 +140,15 @@ public class carShop : MonoBehaviour
             buyText.text = StartGame.cars[index].cost + " Muenzen fuer " + StartGame.cars[index].carName + " eintauschen?";
         }
 
+        if (StartGame.upgrades[index].owned)
+        {
+            buyText.text = StartGame.upgrades[index].upgradeName + " verwenden?";
+        }
+        else
+        {
+            buyText.text = StartGame.upgrades[index].cost + " Muenzen fuer " + StartGame.upgrades[index].cost + " eintauschen?";
+        }
+
         buyText.color = Color.black;
         buyText.gameObject.SetActive(true);
 
@@ -147,7 +156,7 @@ public class carShop : MonoBehaviour
         if (index == 0)
         {
             buyText.color = Color.blue;
-            buyText.text = "Auto bereits in Verwendung!";
+            buyText.text = "Item bereits in Verwendung!";
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
         }
@@ -191,7 +200,7 @@ public class carShop : MonoBehaviour
         }
     }
 
-    void buyUpgrade(int i, Text upgradeTitle, Text upgradeCost)
+    void buyUpgrade(int i)
     {
         if (validTransaction(StartGame.upgrades[i].cost) || StartGame.upgrades[i].owned)
         {
@@ -230,7 +239,7 @@ public class carShop : MonoBehaviour
             {
 
                 Debug.Log("index: " + index);
-                buyUpgrade(index, upgradeTitles[index], upgradeCosts[index]);
+                buyUpgrade(index);
             }
         }
     }

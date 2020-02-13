@@ -66,7 +66,7 @@ public class Board : MonoBehaviour
 
         gameController = GameObject.Find("GameController");
 
-        earnedCoins = 0;
+        earnedCoins = 30;
         levelText.text = "Coins: " + earnedCoins;
 
         width = 7;
@@ -456,7 +456,7 @@ public class Board : MonoBehaviour
     /// </summary>
     public void CheckGameOver()
     {
-        if (Board.isMultiplayer)
+        if (isMultiplayer)
         {
             curPlayerText.text = Board.curPlayer;
 

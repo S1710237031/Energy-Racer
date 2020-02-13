@@ -19,7 +19,7 @@ public class WinScene : MonoBehaviour
         } else
         {
             winnerText.text = "Gewonnen!";
-            winText.text = "";
+            winText.text = "$" + Board.earnedCoins;
         }
     }
 
